@@ -96,10 +96,10 @@ namespace InControl
 		{
 //			Thread.Sleep( 250 );
 
-			if (Input.GetKeyDown( KeyCode.R ))
+			/*if (Input.GetKeyDown( KeyCode.R ))
 			{
 				Application.LoadLevel( "TestInputManager" );
-			}
+			}*/
 		}
 
 

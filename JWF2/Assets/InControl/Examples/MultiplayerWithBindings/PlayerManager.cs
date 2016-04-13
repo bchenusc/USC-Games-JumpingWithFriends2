@@ -44,14 +44,13 @@ namespace MultiplayerWithBindingsExample
 			keyboardListener.Destroy();
 		}
 
-
 		void Update()
 		{
 			if (JoinButtonWasPressedOnListener( joystickListener ))
 			{
 				var inputDevice = InputManager.ActiveDevice;
 
-				if (ThereIsNoPlayerUsingJoystick( inputDevice ))
+				//if (ThereIsNoPlayerUsingJoystick( inputDevice ))
 				{
 					CreatePlayer( inputDevice );
 				}
@@ -59,7 +58,7 @@ namespace MultiplayerWithBindingsExample
 
 			if (JoinButtonWasPressedOnListener( keyboardListener ))
 			{
-				if (ThereIsNoPlayerUsingKeyboard())
+				//if (ThereIsNoPlayerUsingKeyboard())
 				{
 					CreatePlayer( null );
 				}
