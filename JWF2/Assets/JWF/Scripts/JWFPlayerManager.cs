@@ -71,15 +71,10 @@ namespace JWF
 			}
 
 			// Keyboard controls.
-			if (JoinButtonWasPressedOnListener(keyboardListener))
+			int playerID = JoinButtonWasPressedOnKeyboard(keyboardListener);
+			if (playerID != 0)
 			{
-				Debug.Log( "Joined" );
-				// Only the first 2 players are allowed to bind to keyboard.
-				if (_players.Count < 2)
-				{
-					int playerID = JoinButtonWasPressedOnKeyboard(keyboardListener);
-					CreateKeyboardPlayer( playerID );
-				}
+				CreateKeyboardPlayer( playerID );
 			}
 		}
 
@@ -95,7 +90,7 @@ namespace JWF
 
 		/// <summary>
 		/// 
-		/// </summary>
+		/// </summary>  
 		/// <param name="actions"></param>
 		/// <returns>0 = false; 1 = Player1; 2 = Player2 </returns>
 		int JoinButtonWasPressedOnKeyboard(JWFPlayerActions actions)
@@ -133,6 +128,11 @@ namespace JWF
 			return null;
 		}
 
+		/// <summary>
+		/// Create a keyboard only player.
+		/// </summary>
+		/// <param name="playerID"></param>
+		/// <returns></returns>
 		JWFPlayerController CreateKeyboardPlayer(int playerID)
 		{
 			Debug.Log( "Create Keyboard Player " + playerID );
