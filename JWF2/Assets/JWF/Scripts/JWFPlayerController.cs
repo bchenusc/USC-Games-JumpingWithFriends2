@@ -5,17 +5,18 @@ namespace JWF
 {
 	public class JWFPlayerController : MonoBehaviour
 	{
-		public uint PlayerID = 0;
+		private int _playerID = 0;
+		public uint PlayerID
+		{
+			get { return _playerID; }
+			set { _playerID = value; }
+		}
 
-		private JWFPlayerActions playerActions;
+		private JWFPlayerActions _playerActions;
 		public JWFPlayerActions Actions
 		{
 			get { return Actions; }
-		}
-
-		void Start()
-		{
-
+			set { _playerActions = value; }
 		}
 
 		void Update()
