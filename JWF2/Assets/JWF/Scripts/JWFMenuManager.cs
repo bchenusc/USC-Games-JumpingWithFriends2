@@ -28,8 +28,8 @@ namespace JWF
 			keyboardListener.Destroy();
 		}
 
-		
-		
+
+
 		bool StartButtonListenerWasPressed(JWFMenuActions actions)
 		{
 			return actions.Start.WasPressed;

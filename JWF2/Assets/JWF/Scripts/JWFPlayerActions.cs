@@ -18,7 +18,7 @@ namespace JWF
 			Right = CreatePlayerAction( "Move Right" );
 			Jump = CreatePlayerAction( "Jump" );
 			Start = CreatePlayerAction( "Start" );
-			
+
 			Horizontal = CreateOneAxisPlayerAction( Left, Right );
 		}
 
