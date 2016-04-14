@@ -6,7 +6,7 @@ namespace JWF
 	public class JWFPlayerController : MonoBehaviour
 	{
 		private int _playerID = 0;
-		public uint PlayerID
+		public int PlayerID
 		{
 			get { return _playerID; }
 			set { _playerID = value; }
@@ -21,7 +21,7 @@ namespace JWF
 
 		void Update()
 		{
-			if ( Actions.Jump.WasPressed )
+			if ( _playerActions.Jump.WasPressed )
 			{
 				PerformJump();
 			}

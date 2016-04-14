@@ -16,26 +16,29 @@ namespace JWF
 
 		private List<Vector3> _playerStartPositions = new List<Vector3>()
 		{
-			new Vector3( -2,0,0),
-			new Vector3(-1,0,0),
-			new Vector3(1,0,0),
-			new Vector3(2,0,0)
+			new Vector3( -2,3,0),
+			new Vector3(-1,3,0),
+			new Vector3(1,3,0),
+			new Vector3(2,3,0)
 		};
 
 		List<JWFPlayerController> _players = new List<JWFPlayerController>( MAX_PLAYERS );
 
 		JWFPlayerActions joystickListener;
+		JWFPlayerActions keyboardListener;
 
 		void OnEnable()
 		{
 			InputManager.OnDeviceDetached += OnDeviceDetached;
 			joystickListener = JWFPlayerActions.CreateWithJoystickBindings(0);
+			keyboardListener = JWFPlayerActions.CreateKeyboardMenuBindings();
 		}
 
 		void OnDisbale()
 		{
 			InputManager.OnDeviceDetached -= OnDeviceDetached;
 			joystickListener.Destroy();
+			keyboardListener.Destroy();
 		}
 
 		void OnDeviceDetached(InputDevice inputDevice)
@@ -56,13 +59,26 @@ namespace JWF
 
 		void Update()
 		{
+			// Joystick controls.
 			if ( JoinButtonWasPressedOnListener( joystickListener ) )
 			{
 				var inputDevice = InputManager.ActiveDevice;
 
 				if ( ThereIsNoPlayerUsingThisJoystick( inputDevice ) )
 				{
-					CreatePlayer( inputDevice );
+					CreateJoystickPlayer( inputDevice );
+				}
+			}
+
+			// Keyboard controls.
+			if (JoinButtonWasPressedOnListener(keyboardListener))
+			{
+				Debug.Log( "Joined" );
+				// Only the first 2 players are allowed to bind to keyboard.
+				if (_players.Count < 2)
+				{
+					int playerID = JoinButtonWasPressedOnKeyboard(keyboardListener);
+					CreateKeyboardPlayer( playerID );
 				}
 			}
 		}
@@ -75,6 +91,18 @@ namespace JWF
 		bool JoinButtonWasPressedOnListener(JWFPlayerActions actions)
 		{
 			return actions.Start.WasPressed;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="actions"></param>
+		/// <returns>0 = false; 1 = Player1; 2 = Player2 </returns>
+		int JoinButtonWasPressedOnKeyboard(JWFPlayerActions actions)
+		{
+			if ( actions.P1Start.WasPressed ) return 1;
+			if ( actions.P2Start.WasPressed ) return 2;
+			return 0;
 		}
 
 		/// <summary>
@@ -105,13 +133,31 @@ namespace JWF
 			return null;
 		}
 
+		JWFPlayerController CreateKeyboardPlayer(int playerID)
+		{
+			Debug.Log( "Create Keyboard Player " + playerID );
+			var spawnPosition = _playerStartPositions[playerID];
+			var gameObject = (GameObject) Instantiate( PlayerPrefab, spawnPosition, Quaternion.identity );
+			var player = gameObject.GetComponent<JWFPlayerController>();
+			player.PlayerID = playerID;
+
+			// Keyboard player for only player 1 and player 2.
+			JWFPlayerActions actions;
+			actions = JWFPlayerActions.CreateWithKeyboardBindings( playerID );
+			player.Actions = actions;
+
+			_players.Add( player );
+			return player;
+		}
+
 		/// <summary>
 		/// Creates a joystick player.
 		/// </summary>
 		/// <param name="inputDevice"></param>
 		/// <returns></returns>
-		JWFPlayerController CreatePlayer(InputDevice inputDevice)
+		JWFPlayerController CreateJoystickPlayer(InputDevice inputDevice)
 		{
+			Debug.Log( "Create joystick player " + inputDevice );
 			int playerID = _players.Count + 1;
 
 			if ( playerID <= MAX_PLAYERS )
@@ -119,14 +165,24 @@ namespace JWF
 				var spawnPosition = _playerStartPositions[playerID];
 				var gameObject = (GameObject) Instantiate( PlayerPrefab, spawnPosition, Quaternion.identity );
 				var player = gameObject.GetComponent<JWFPlayerController>();
+				player.PlayerID = playerID;
 
-				// Create a new instance and specifically set it to listen to the
-				// given input device (joystick).
-				JWFPlayerActions actions;
-
-				actions = JWFPlayerActions.CreateWithJoystickBindings( playerID );
-				actions.Device = inputDevice;
-				player.Actions = actions;
+				// Create either keyboard only controls or controller controls!
+				if (inputDevice == null)
+				{
+					// Keyboard player for only player 1 and player 2.
+					JWFPlayerActions actions;
+					actions = JWFPlayerActions.CreateWithKeyboardBindings( playerID );
+					player.Actions = actions;
+				}
+				else
+				{
+					// Controller
+					JWFPlayerActions actions;
+					actions = JWFPlayerActions.CreateWithJoystickBindings( playerID );
+					actions.Device = inputDevice;
+					player.Actions = actions;
+				}
 
 				_players.Add( player );
 				return player;
