@@ -5,21 +5,10 @@ namespace JWF
 {
 	public class JWFPlayerActions : PlayerActionSet
 	{
-		private int _KeyboardPlayer = 0;
-		public int IsKeyboardPlayer
-		{
-			get { return _KeyboardPlayer; }
-			set { _KeyboardPlayer = value; }
-		}
-
 		public PlayerAction Left;
 		public PlayerAction Right;
 		public PlayerAction Jump;
 		public PlayerAction Start;
-
-		// Player specific for keyboard only.
-		public PlayerAction P1Start;
-		public PlayerAction P2Start;
 
 		public PlayerOneAxisAction Horizontal;
 
@@ -29,18 +18,8 @@ namespace JWF
 			Right = CreatePlayerAction( "Move Right" );
 			Jump = CreatePlayerAction( "Jump" );
 			Start = CreatePlayerAction( "Start" );
-			P1Start = CreatePlayerAction( "P1Start" );
-			P2Start = CreatePlayerAction( "P2Start" );
+			
 			Horizontal = CreateOneAxisPlayerAction( Left, Right );
-		}
-
-		public static JWFPlayerActions CreateKeyboardMenuBindings()
-		{
-			var actions = new JWFPlayerActions();
-			// Used in menus that are player ambiguous.
-			actions.P1Start.AddDefaultBinding( Key.W );
-			actions.P2Start.AddDefaultBinding( Key.UpArrow );
-			return actions;
 		}
 
 		public static JWFPlayerActions CreateWithKeyboardBindings(int playerID)
