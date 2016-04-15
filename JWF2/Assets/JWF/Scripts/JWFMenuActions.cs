@@ -30,6 +30,15 @@ namespace JWF
 			// Used in menus that are player ambiguous.
 			actions.P1Start.AddDefaultBinding( Key.W );
 			actions.P2Start.AddDefaultBinding( Key.UpArrow );
+            actions.Start.AddDefaultBinding(Key.PadEnter);
+            actions.Start.AddDefaultBinding(Key.Return);
+
+            actions.Left.AddDefaultBinding(Key.A);
+            actions.Right.AddDefaultBinding(Key.D);
+            actions.Jump.AddDefaultBinding(Key.W);
+			actions.Left.AddDefaultBinding( Key.LeftArrow );
+			actions.Right.AddDefaultBinding( Key.RightArrow );
+			actions.Jump.AddDefaultBinding( Key.UpArrow );
 			return actions;
 		}
 
