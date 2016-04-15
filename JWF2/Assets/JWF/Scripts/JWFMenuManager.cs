@@ -52,6 +52,11 @@ namespace JWF
 				menuState.RightPressed();
 			}
 
+			if ( BackWasPressed( joystickListener ) || BackWasPressed( keyboardListener ) )
+			{
+				menuState.BackPressed();
+			}
+
 			menuState.MenuUpdate();
 		}
 
@@ -80,6 +85,11 @@ namespace JWF
 		bool RightWasPressed(JWFMenuActions actions)
 		{
 			return actions.Right.WasPressed;
+		}
+
+		bool BackWasPressed(JWFMenuActions actions)
+		{
+			return actions.Back.WasPressed;
 		}
 	}
 }

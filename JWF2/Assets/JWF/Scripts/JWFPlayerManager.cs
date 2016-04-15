@@ -38,12 +38,18 @@ namespace JWF
 			var player = FindPlayerUsingJoystick( inputDevice );
 			if ( player.id != 0 )
 			{
-				RemovePlayer( player );
+				RemovePlayer( player.id );
 			}
 		}
 
-		public void RemovePlayer(JWFPlayerData player)
+		public void RemovePlayer(int playerId)
 		{
+			JWFPlayerData player = new JWFPlayerData();
+			foreach(JWFPlayerData p in _players)
+			{
+				if ( p.id == playerId )
+					player = p;
+			}
 			_players.Remove( player );
 			player.actions = null;
 		}

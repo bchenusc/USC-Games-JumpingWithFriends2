@@ -25,6 +25,8 @@ namespace JWF
 
 		public virtual void EnterPressed() { }
 
+		public virtual void BackPressed() { }
+
 		public virtual void MenuUpdate() { }
 	}
 

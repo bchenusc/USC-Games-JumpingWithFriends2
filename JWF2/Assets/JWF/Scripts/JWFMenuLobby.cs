@@ -51,10 +51,16 @@ namespace JWF
 			}
 
 			// Keyboard controls.
-			int playerID = JoinButtonWasPressedOnKeyboard(GetKeyboardListener());
-			if ( playerID != 0 )
+			int joiningPlayer = JoinButtonWasPressedOnKeyboard(GetKeyboardListener());
+			if ( joiningPlayer != 0 )
 			{
-				CreateKeyboardPlayer( playerID );
+				CreateKeyboardPlayer( joiningPlayer );
+			}
+
+			int removingPlayer = RemoveButtonWasPressedOnKeybaord(GetKeyboardListener());
+			if (removingPlayer != 0)
+			{
+				RemovePlayer( removingPlayer );
 			}
 		}
 
@@ -80,6 +86,13 @@ namespace JWF
 			return 0;
 		}
 
+		int RemoveButtonWasPressedOnKeybaord(JWFMenuActions actions)
+		{
+			if ( actions.P1Back.WasPressed ) return 1;
+			if ( actions.P2Back.WasPressed ) return 2;
+			return 0;
+		}
+
 		bool ThereIsNoPlayerUsingThisJoystick(InputDevice inputDevice)
 		{
 			return _PlayerManager.ThereIsNoPlayerUsingThisJoystick( inputDevice );
@@ -96,9 +109,10 @@ namespace JWF
 			return _PlayerManager.CreateKeyboardPlayer( playerID );
 		}
 
-		void DeletePlayer(JWFPlayerData player)
+		void RemovePlayer(int playerId)
 		{
-			_PlayerManager.RemovePlayer( player );
+			PlayerStatues[playerId - 1].SetActive( false );
+			_PlayerManager.RemovePlayer( playerId );
 		}
 	}
 

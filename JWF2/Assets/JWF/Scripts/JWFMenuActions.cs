@@ -12,6 +12,8 @@ namespace JWF
 		public PlayerAction Start;
 		public PlayerAction P1Start;
 		public PlayerAction P2Start;
+		public PlayerAction P1Back;
+		public PlayerAction P2Back;
 		public PlayerAction Back;
 
 		public JWFMenuActions()
@@ -24,6 +26,8 @@ namespace JWF
 			P1Start = CreatePlayerAction( "P1Start" );
 			P2Start = CreatePlayerAction( "P2Start" );
 
+			P1Back = CreatePlayerAction( "P1Back" );
+			P2Back = CreatePlayerAction( "P2Back" );
 			Back = CreatePlayerAction( "Back" );
 		}
 
@@ -70,6 +74,14 @@ namespace JWF
 
 			actions.Start.AddDefaultBinding( InputControlType.Start );
 			actions.Start.AddDefaultBinding( Key.PadEnter );
+
+			actions.Back.AddDefaultBinding( Key.Backspace );
+			actions.Back.AddDefaultBinding( Key.S );
+			actions.Back.AddDefaultBinding( Key.DownArrow );
+
+			actions.Back.AddDefaultBinding( InputControlType.DPadDown );
+			actions.Back.AddDefaultBinding( InputControlType.LeftStickDown );
+			actions.Back.AddDefaultBinding( InputControlType.Action2 );
 			return actions;
 		}
 	}
