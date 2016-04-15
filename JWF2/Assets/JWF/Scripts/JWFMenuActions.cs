@@ -12,6 +12,7 @@ namespace JWF
 		public PlayerAction Start;
 		public PlayerAction P1Start;
 		public PlayerAction P2Start;
+		public PlayerAction Back;
 
 		public JWFMenuActions()
 		{
@@ -22,6 +23,8 @@ namespace JWF
 			Start = CreatePlayerAction( "Start" );
 			P1Start = CreatePlayerAction( "P1Start" );
 			P2Start = CreatePlayerAction( "P2Start" );
+
+			Back = CreatePlayerAction( "Back" );
 		}
 
 		public static JWFMenuActions CreateWithKeyboardBindings()
@@ -30,12 +33,16 @@ namespace JWF
 			// Used in menus that are player ambiguous.
 			actions.P1Start.AddDefaultBinding( Key.W );
 			actions.P2Start.AddDefaultBinding( Key.UpArrow );
-            actions.Start.AddDefaultBinding(Key.PadEnter);
-            actions.Start.AddDefaultBinding(Key.Return);
+			actions.Start.AddDefaultBinding( Key.PadEnter );
+			actions.Start.AddDefaultBinding( Key.Return );
 
-            actions.Left.AddDefaultBinding(Key.A);
-            actions.Right.AddDefaultBinding(Key.D);
-            actions.Jump.AddDefaultBinding(Key.W);
+			actions.Back.AddDefaultBinding( Key.Backspace );
+			actions.Back.AddDefaultBinding( Key.S );
+			actions.Back.AddDefaultBinding( Key.DownArrow );
+
+			actions.Left.AddDefaultBinding( Key.A );
+			actions.Right.AddDefaultBinding( Key.D );
+			actions.Jump.AddDefaultBinding( Key.W );
 			actions.Left.AddDefaultBinding( Key.LeftArrow );
 			actions.Right.AddDefaultBinding( Key.RightArrow );
 			actions.Jump.AddDefaultBinding( Key.UpArrow );

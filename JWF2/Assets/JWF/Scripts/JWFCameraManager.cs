@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace JWF
 {
 	public class JWFCameraManager : MonoBehaviour
 	{
-        public float CameraMoveSpeed = 0.5f;
+		private float CameraMoveSpeed = 2.0f;
 
-		public void MoveCameraByState(JWFMenuState state)
+		public void MoveCameraTo(Vector3 position)
 		{
-            Vector3 camPosition = JWFMenuDefines.CameraMenuPositions[(int)state];
-            iTween.MoveTo(gameObject, camPosition, CameraMoveSpeed);
+			iTween.MoveTo( gameObject, position, CameraMoveSpeed );
 		}
 	}
 }
