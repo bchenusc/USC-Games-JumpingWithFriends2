@@ -58,7 +58,7 @@ namespace MultiplayerBasicExample
 
 			if (JoinButtonWasPressedOnDevice( inputDevice ))
 			{
-				if (ThereIsNoPlayerUsingDevice( inputDevice ))
+				//if (ThereIsNoPlayerUsingDevice( inputDevice ))
 				{
 					CreatePlayer( inputDevice );
 				}
