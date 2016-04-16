@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using InControl;
+using System;
 
 namespace JWF
 {
@@ -8,29 +9,22 @@ namespace JWF
 	{
 		public int id;
 		public JWFPlayerActions actions;
+
+		public void RemoveActions()
+		{
+			actions = null;
+		}
 	};
 
-	public class JWFPlayerManager : MonoBehaviour
+	public class JWFPlayerManager : Singleton<JWFPlayerManager>
 	{
 		static int MAX_PLAYERS = 4;
 
 		List<JWFPlayerData> _players = new List<JWFPlayerData>( MAX_PLAYERS );
 
-		JWFMenuActions joystickListener;
-		JWFMenuActions keyboardListener;
-
-		void OnEnable()
+		public int GetPlayerCount()
 		{
-			InputManager.OnDeviceDetached += OnDeviceDetached;
-			joystickListener = JWFMenuActions.CreateWithJoystickBindings();
-			keyboardListener = JWFMenuActions.CreateWithKeyboardBindings();
-		}
-
-		void OnDisbale()
-		{
-			InputManager.OnDeviceDetached -= OnDeviceDetached;
-			joystickListener.Destroy();
-			keyboardListener.Destroy();
+			return _players.Count;
 		}
 
 		void OnDeviceDetached(InputDevice inputDevice)
@@ -42,10 +36,19 @@ namespace JWF
 			}
 		}
 
+		public void RemoveAllPlayers()
+		{
+			for ( int i = 0 ; i < _players.Count ; i++ )
+			{
+				_players[i].RemoveActions();
+			}
+			_players.Clear();
+		}
+
 		public void RemovePlayer(int playerId)
 		{
 			JWFPlayerData player = new JWFPlayerData();
-			foreach(JWFPlayerData p in _players)
+			foreach ( JWFPlayerData p in _players )
 			{
 				if ( p.id == playerId )
 					player = p;
@@ -83,8 +86,24 @@ namespace JWF
 			return new JWFPlayerData();
 		}
 
+		bool IsPlayerAlreadyRegistered(int playerID)
+		{
+			foreach ( JWFPlayerData p in _players )
+			{
+				if ( p.id == playerID )
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public JWFPlayerData CreateKeyboardPlayer(int playerID)
 		{
+			if ( IsPlayerAlreadyRegistered( playerID ) )
+			{
+				return new JWFPlayerData();
+			}
 			Debug.Log( "Create Keyboard Player " + playerID );
 			var player = new JWFPlayerData();
 			player.id = playerID;
@@ -100,6 +119,10 @@ namespace JWF
 
 		public JWFPlayerData CreateJoystickPlayer(InputDevice inputDevice)
 		{
+			if ( !ThereIsNoPlayerUsingThisJoystick( inputDevice ) )
+			{
+				return new JWFPlayerData();
+			}
 			Debug.Log( "Create joystick player " + inputDevice );
 			int playerID = _players.Count + 1;
 
@@ -128,6 +151,11 @@ namespace JWF
 				return player;
 			}
 			return new JWFPlayerData();
+		}
+
+		protected override bool ShouldDestroyOnLoad()
+		{
+			return false;
 		}
 	}
 }

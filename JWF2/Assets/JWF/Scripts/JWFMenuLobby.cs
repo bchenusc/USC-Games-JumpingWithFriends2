@@ -8,10 +8,16 @@ namespace JWF
 	public class JWFMenuLobby : JWFMenuBase
 	{
 		// Set in inspector.
-		public JWFPlayerManager _PlayerManager;
+		public Text TopInfoText;
 		public GameObject[] JoinButtons;
 		public GameObject[] JoinInfoPanels;
 		public GameObject[] PlayerStatues;
+
+		private static string OneVOne = "Play One-Versus-One";
+		private static string TwoVTwo = "Play Two-Versus-Two";
+		private static string Waiting = "Waiting for Players...";
+
+		bool _ReadyToTransitionToGame = false;
 
 		private enum JWFMenuLobbyState
 		{
@@ -24,6 +30,7 @@ namespace JWF
 
 		void Start()
 		{
+			_ReadyToTransitionToGame = false;
 			_LobbyStates.Add( gameObject.GetComponent<JWFMenuStart>() ); // 0 Go back to Start
 			_MenuManager = gameObject.GetComponent<JWFMenuManager>();
 
@@ -43,6 +50,14 @@ namespace JWF
 			return JWFMenuState.MenuLobby;
 		}
 
+		public override void EnterPressed()
+		{
+			if (_ReadyToTransitionToGame)
+			{
+				JWFSceneManager.LoadLevel( "JWFClassicMap" );
+			}
+		}
+
 		public override void MenuUpdate()
 		{
 			// Joystick controls.
@@ -52,7 +67,7 @@ namespace JWF
 
 				if ( ThereIsNoPlayerUsingThisJoystick( inputDevice ) )
 				{
-					CreateJoystickPlayer( inputDevice );
+					CreatePlayer( false, inputDevice, 0 /*Null playerID = joystick*/ );
 				}
 			}
 
@@ -60,7 +75,7 @@ namespace JWF
 			int joiningPlayer = JoinButtonWasPressedOnKeyboard(GetKeyboardListener());
 			if ( joiningPlayer != 0 )
 			{
-				CreateKeyboardPlayer( joiningPlayer );
+				CreatePlayer( true, null /*Keyboard player has no inputDevice*/, joiningPlayer);
 			}
 
 			int removingPlayer = RemoveButtonWasPressedOnKeybaord(GetKeyboardListener());
@@ -71,6 +86,7 @@ namespace JWF
 
 			if (BackButtonWasPressed(GetJoystickListener()) || BackButtonWasPressed(GetKeyboardListener()))
 			{
+				RemoveAllPlayers();
 				_MenuManager.ChangeStateTo( _LobbyStates[(int) JWFMenuLobbyState.Back] );
 			}
 		}
@@ -111,25 +127,64 @@ namespace JWF
 
 		bool ThereIsNoPlayerUsingThisJoystick(InputDevice inputDevice)
 		{
-			return _PlayerManager.ThereIsNoPlayerUsingThisJoystick( inputDevice );
+			return JWFPlayerManager.Get.ThereIsNoPlayerUsingThisJoystick( inputDevice );
+		}
+
+		JWFPlayerData CreatePlayer(bool isKeyboardPlayer, InputDevice inputDevice, int playerID)
+		{
+			JWFPlayerData data;
+			if ( isKeyboardPlayer )
+				data = CreateKeyboardPlayer( playerID );
+			else
+				data = CreateJoystickPlayer( inputDevice );
+			ChangeTopTextToReflectPlayerCount();
+			return data;
+		}
+
+		void ChangeTopTextToReflectPlayerCount()
+		{
+			TopInfoText.text = Waiting;
+			_ReadyToTransitionToGame = false;
+			if ( JWFPlayerManager.Get.GetPlayerCount() == 2 )
+			{
+				TopInfoText.text = OneVOne;
+				_ReadyToTransitionToGame = true;
+			}
+			else if ( JWFPlayerManager.Get.GetPlayerCount() == 4 )
+			{
+				TopInfoText.text = TwoVTwo;
+				_ReadyToTransitionToGame = true;
+			}
 		}
 
 		JWFPlayerData CreateJoystickPlayer(InputDevice inputDevice)
 		{
-			return _PlayerManager.CreateJoystickPlayer( inputDevice );
+			return JWFPlayerManager.Get.CreateJoystickPlayer( inputDevice );
 		}
 
 		JWFPlayerData CreateKeyboardPlayer(int playerID)
 		{
 			PlayerStatues[playerID - 1].SetActive( true );
-			return _PlayerManager.CreateKeyboardPlayer( playerID );
+			return JWFPlayerManager.Get.CreateKeyboardPlayer( playerID );
 		}
 
 		void RemovePlayer(int playerId)
 		{
-			Debug.Log( "Remove Player" );
+			Debug.Log( "Remove Player " + playerId );
 			PlayerStatues[playerId - 1].SetActive( false );
-			_PlayerManager.RemovePlayer( playerId );
+			JWFPlayerManager.Get.RemovePlayer( playerId );
+			ChangeTopTextToReflectPlayerCount();
+		}
+
+		void RemoveAllPlayers()
+		{
+			Debug.Log( "Remove All Players ");
+			foreach (GameObject statue in PlayerStatues)
+			{
+				statue.SetActive( false );
+			}
+			JWFPlayerManager.Get.RemoveAllPlayers();
+			ChangeTopTextToReflectPlayerCount();
 		}
 	}
 

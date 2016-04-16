@@ -22,6 +22,7 @@ namespace JWF
 		{
 			cameraManager = Camera.main.GetComponent<JWFCameraManager>();
 			ChangeStateTo(gameObject.GetComponent<JWFMenuStart>());
+			JWFPlayerManager.Get.Create();
 		}
 
 		public void ChangeStateTo(JWFMenuBase state)

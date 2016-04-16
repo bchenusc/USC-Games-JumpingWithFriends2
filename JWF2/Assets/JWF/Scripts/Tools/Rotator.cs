@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace JWF
 {
-	public class JWFRotator : MonoBehaviour
+	public class Rotator : MonoBehaviour
 	{
 		public Space CoordinateSpace = Space.World;
 		public Vector3 Axis = Vector3.up;
