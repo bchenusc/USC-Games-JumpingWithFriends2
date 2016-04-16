@@ -13,6 +13,12 @@ namespace JWF
 		public GameObject[] JoinInfoPanels;
 		public GameObject[] PlayerStatues;
 
+		private enum JWFMenuLobbyState
+		{
+			Back = 0,
+			Gameplay = 1
+		}
+
 		private JWFMenuManager _MenuManager;
 		private List<JWFMenuBase> _LobbyStates = new List<JWFMenuBase>();
 
@@ -62,6 +68,11 @@ namespace JWF
 			{
 				RemovePlayer( removingPlayer );
 			}
+
+			if (BackButtonWasPressed(GetJoystickListener()) || BackButtonWasPressed(GetKeyboardListener()))
+			{
+				_MenuManager.ChangeStateTo( _LobbyStates[(int) JWFMenuLobbyState.Back] );
+			}
 		}
 
 		JWFMenuActions GetJoystickListener()
@@ -93,6 +104,11 @@ namespace JWF
 			return 0;
 		}
 
+		bool BackButtonWasPressed(JWFMenuActions actions)
+		{
+			return actions.Back.WasPressed;
+		}
+
 		bool ThereIsNoPlayerUsingThisJoystick(InputDevice inputDevice)
 		{
 			return _PlayerManager.ThereIsNoPlayerUsingThisJoystick( inputDevice );
@@ -111,6 +127,7 @@ namespace JWF
 
 		void RemovePlayer(int playerId)
 		{
+			Debug.Log( "Remove Player" );
 			PlayerStatues[playerId - 1].SetActive( false );
 			_PlayerManager.RemovePlayer( playerId );
 		}

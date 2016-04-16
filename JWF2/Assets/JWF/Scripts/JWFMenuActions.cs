@@ -41,8 +41,8 @@ namespace JWF
 			actions.Start.AddDefaultBinding( Key.Return );
 
 			actions.Back.AddDefaultBinding( Key.Backspace );
-			actions.Back.AddDefaultBinding( Key.S );
-			actions.Back.AddDefaultBinding( Key.DownArrow );
+			actions.P1Back.AddDefaultBinding( Key.S );
+			actions.P2Back.AddDefaultBinding( Key.DownArrow );
 
 			actions.Left.AddDefaultBinding( Key.A );
 			actions.Right.AddDefaultBinding( Key.D );
@@ -76,8 +76,6 @@ namespace JWF
 			actions.Start.AddDefaultBinding( Key.PadEnter );
 
 			actions.Back.AddDefaultBinding( Key.Backspace );
-			actions.Back.AddDefaultBinding( Key.S );
-			actions.Back.AddDefaultBinding( Key.DownArrow );
 
 			actions.Back.AddDefaultBinding( InputControlType.DPadDown );
 			actions.Back.AddDefaultBinding( InputControlType.LeftStickDown );
