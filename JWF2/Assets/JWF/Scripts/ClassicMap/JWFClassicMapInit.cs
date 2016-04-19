@@ -64,6 +64,7 @@ namespace JWF
 		{
 			GameObject clone = Instantiate(PlayerPrefab, position, PlayerPrefab.transform.rotation) as GameObject;
 			HACK_SwitchColor( player.ID, clone );
+			clone.GetComponent<JWFPlayerController>().PlayerData = player;
 		}
 
 		void HACK_SwitchColor(int playerID, GameObject player)

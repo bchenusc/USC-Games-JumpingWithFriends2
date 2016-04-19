@@ -5,31 +5,29 @@ namespace JWF
 {
 	public class JWFPlayerController : MonoBehaviour
 	{
-		private int _playerID = 0;
-		public int PlayerID
+		private Transform _CenterOfMass;
+		private Rigidbody _Rigidbody;
+
+		private JWFPlayerData _PlayerData = null;
+		public JWFPlayerData PlayerData
 		{
-			get { return _playerID; }
-			set { _playerID = value; }
+			get { return _PlayerData; }
+			set { _PlayerData = value; }
 		}
 
-		private JWFPlayerActions _playerActions = null;
-		public JWFPlayerActions Actions
-		{
-			get { return Actions; }
-			set { _playerActions = value; }
-		}
+		private bool _Grounded = false;
 
 		void Update()
 		{
-			if ( _playerActions.Jump.WasPressed )
+			if ( PlayerData.Actions.Jump.WasPressed )
 			{
 				PerformJump();
 			}
-			if (_playerActions.Left.WasPressed)
+			if ( PlayerData.Actions.Left.WasPressed)
 			{
 				TiltLeft();
 			}
-			if (_playerActions.Right.WasPressed)
+			if ( PlayerData.Actions.Right.WasPressed)
 			{
 				TiltRight();
 			}
@@ -37,19 +35,41 @@ namespace JWF
 
 		void PerformJump()
 		{
-			Debug.Log( "Player " + PlayerID + " jumped." );
 
 		}
 
 		void TiltLeft()
 		{
-			Debug.Log( "Player " + PlayerID + " tilted left." );
+
 		}
 
 		void TiltRight()
 		{
-			Debug.Log( "Player " + PlayerID + " tilted right." );
 
+		}
+
+		void FixedUpdate()
+		{
+
+		}
+
+		void OnCollisionStay(Collision c)
+		{
+
+		}
+
+		void OnCollisionExit(Collision c)
+		{
+			_Grounded = false;
+
+		}
+
+		void OnCollisionEnter(Collision c)
+		{
+			if (c.gameObject.CompareTag("Killzone"))
+			{
+				// Player died.
+			}
 		}
 	}
 }
