@@ -3,8 +3,8 @@ using System.Collections;
 
 public class JWFPlayerRealign : MonoBehaviour
 {
-/*
-	float mRealignForce = 1600; // up force
+
+	/*float mRealignForce = 1600; // up force
 	Transform mCenterOfMass;
 	Rigidbody rb;
 
@@ -100,5 +100,5 @@ public class JWFPlayerRealign : MonoBehaviour
 
 		}
 	}
-	*/
+*/	
 }
