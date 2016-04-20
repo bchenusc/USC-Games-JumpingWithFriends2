@@ -12,7 +12,7 @@ namespace JWF
 			set { _playerID = value; }
 		}
 
-		private JWFPlayerActions _playerActions;
+		private JWFPlayerActions _playerActions = null;
 		public JWFPlayerActions Actions
 		{
 			get { return Actions; }
@@ -25,16 +25,31 @@ namespace JWF
 			{
 				PerformJump();
 			}
+			if (_playerActions.Left.WasPressed)
+			{
+				TiltLeft();
+			}
+			if (_playerActions.Right.WasPressed)
+			{
+				TiltRight();
+			}
 		}
 
 		void PerformJump()
 		{
-			Debug.Log( "Perform Jump" );
+			Debug.Log( "Player " + PlayerID + " jumped." );
+
 		}
 
-		void PerformMove(float x)
+		void TiltLeft()
 		{
-			Debug.Log( "Perform Move" );
+			Debug.Log( "Player " + PlayerID + " tilted left." );
+		}
+
+		void TiltRight()
+		{
+			Debug.Log( "Player " + PlayerID + " tilted right." );
+
 		}
 	}
 }

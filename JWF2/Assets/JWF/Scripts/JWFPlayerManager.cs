@@ -5,17 +5,6 @@ using System;
 
 namespace JWF
 {
-	public struct JWFPlayerData
-	{
-		public int id;
-		public JWFPlayerActions actions;
-
-		public void RemoveActions()
-		{
-			actions = null;
-		}
-	};
-
 	public class JWFPlayerManager : Singleton<JWFPlayerManager>
 	{
 		static int MAX_PLAYERS = 4;
@@ -26,13 +15,25 @@ namespace JWF
 		{
 			return _players.Count;
 		}
+		
+		public JWFPlayerData GetPlayerWithID(int id)
+		{
+			foreach (JWFPlayerData player in _players)
+			{
+				if (player.ID == id)
+				{
+					return player;
+				}
+			}
+			return null;
+		}
 
 		void OnDeviceDetached(InputDevice inputDevice)
 		{
 			var player = FindPlayerUsingJoystick( inputDevice );
-			if ( player.id != 0 )
+			if ( player == null )
 			{
-				RemovePlayer( player.id );
+				RemovePlayer( player.ID );
 			}
 		}
 
@@ -47,14 +48,17 @@ namespace JWF
 
 		public void RemovePlayer(int playerId)
 		{
-			JWFPlayerData player = new JWFPlayerData();
+			JWFPlayerData player = null;
 			foreach ( JWFPlayerData p in _players )
 			{
-				if ( p.id == playerId )
+				if ( p.ID == playerId )
+				{
 					player = p;
+					_players.Remove( player );
+					player.Reset();
+					return;
+				}
 			}
-			_players.Remove( player );
-			player.actions = null;
 		}
 
 		bool JoinButtonWasPressedOnListener(JWFMenuActions actions)
@@ -71,26 +75,26 @@ namespace JWF
 
 		public bool ThereIsNoPlayerUsingThisJoystick(InputDevice inputDevice)
 		{
-			return FindPlayerUsingJoystick( inputDevice ).id == 0;
+			return FindPlayerUsingJoystick( inputDevice ).ID == 0;
 		}
 
 		JWFPlayerData FindPlayerUsingJoystick(InputDevice inputDevice)
 		{
 			foreach ( var player in _players )
 			{
-				if ( player.actions.Device == inputDevice )
+				if ( player.Actions.Device == inputDevice )
 				{
 					return player;
 				}
 			}
-			return new JWFPlayerData();
+			return null;
 		}
 
 		bool IsPlayerAlreadyRegistered(int playerID)
 		{
 			foreach ( JWFPlayerData p in _players )
 			{
-				if ( p.id == playerID )
+				if ( p.ID == playerID )
 				{
 					return true;
 				}
@@ -102,17 +106,15 @@ namespace JWF
 		{
 			if ( IsPlayerAlreadyRegistered( playerID ) )
 			{
-				return new JWFPlayerData();
+				return null;
 			}
 			Debug.Log( "Create Keyboard Player " + playerID );
-			var player = new JWFPlayerData();
-			player.id = playerID;
 
 			// Keyboard player for only player 1 and player 2.
 			JWFPlayerActions actions;
 			actions = JWFPlayerActions.CreateWithKeyboardBindings( playerID );
-			player.actions = actions;
 
+			var player = new JWFPlayerData(playerID, actions, DetermineTeam(playerID));
 			_players.Add( player );
 			return player;
 		}
@@ -121,36 +123,39 @@ namespace JWF
 		{
 			if ( !ThereIsNoPlayerUsingThisJoystick( inputDevice ) )
 			{
-				return new JWFPlayerData();
+				return null;
 			}
 			Debug.Log( "Create joystick player " + inputDevice );
 			int playerID = _players.Count + 1;
 
 			if ( playerID <= MAX_PLAYERS )
 			{
-				var player = new JWFPlayerData();
-				player.id = playerID;
+				JWFPlayerActions actions;
 
 				// Create either keyboard only controls or controller controls!
 				if ( inputDevice == null )
 				{
 					// Keyboard player for only player 1 and player 2.
-					JWFPlayerActions actions;
 					actions = JWFPlayerActions.CreateWithKeyboardBindings( playerID );
-					player.actions = actions;
 				}
 				else
 				{
 					// Controller
-					JWFPlayerActions actions;
 					actions = JWFPlayerActions.CreateWithJoystickBindings( playerID );
 					actions.Device = inputDevice;
-					player.actions = actions;
 				}
+
+				var player = new JWFPlayerData(playerID, actions, DetermineTeam(playerID));
 				_players.Add( player );
 				return player;
 			}
-			return new JWFPlayerData();
+			return null;
+		}
+
+		// Hack for determining the team.
+		private PlayerTeam DetermineTeam(int playerID)
+		{
+			return playerID == 1 || playerID == 3 ? PlayerTeam.Blue : PlayerTeam.Red;
 		}
 
 		protected override bool ShouldDestroyOnLoad()
