@@ -52,9 +52,9 @@ namespace JWF
 
 		public override void EnterPressed()
 		{
-			if (_ReadyToTransitionToGame)
+			if ( _ReadyToTransitionToGame )
 			{
-				JWFSceneManager.LoadLevel( "JWFClassicMap" );
+				JWFSceneManager.LoadLevel( Scenes.CLASSIC_MAP );
 			}
 		}
 
@@ -75,16 +75,16 @@ namespace JWF
 			int joiningPlayer = JoinButtonWasPressedOnKeyboard(GetKeyboardListener());
 			if ( joiningPlayer != 0 )
 			{
-				CreatePlayer( true, null /*Keyboard player has no inputDevice*/, joiningPlayer);
+				CreatePlayer( true, null /*Keyboard player has no inputDevice*/, joiningPlayer );
 			}
 
 			int removingPlayer = RemoveButtonWasPressedOnKeybaord(GetKeyboardListener());
-			if (removingPlayer != 0)
+			if ( removingPlayer != 0 )
 			{
 				RemovePlayer( removingPlayer );
 			}
 
-			if (BackButtonWasPressed(GetJoystickListener()) || BackButtonWasPressed(GetKeyboardListener()))
+			if ( BackButtonWasPressed( GetJoystickListener() ) || BackButtonWasPressed( GetKeyboardListener() ) )
 			{
 				RemoveAllPlayers();
 				_MenuManager.ChangeStateTo( _LobbyStates[(int) JWFMenuLobbyState.Back] );
@@ -178,8 +178,8 @@ namespace JWF
 
 		void RemoveAllPlayers()
 		{
-			Debug.Log( "Remove All Players ");
-			foreach (GameObject statue in PlayerStatues)
+			Debug.Log( "Remove All Players " );
+			foreach ( GameObject statue in PlayerStatues )
 			{
 				statue.SetActive( false );
 			}

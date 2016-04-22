@@ -15,6 +15,11 @@ namespace JWF
 		{
 			return _players.Count;
 		}
+
+		public PlayerTeam GetPlayerTeam(int playerId)
+		{
+			return GetPlayerWithID( playerId ).Team;
+		}
 		
 		public JWFPlayerData GetPlayerWithID(int id)
 		{

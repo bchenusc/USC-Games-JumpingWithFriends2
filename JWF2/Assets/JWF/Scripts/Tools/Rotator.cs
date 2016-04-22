@@ -11,7 +11,6 @@ namespace JWF
 
 		void Update()
 		{
-			// ...also rotate around the World's Y axis
 			transform.Rotate( Axis * Time.deltaTime * Speed, CoordinateSpace );
 		}
 	}

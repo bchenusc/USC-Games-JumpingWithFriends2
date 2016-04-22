@@ -5,8 +5,8 @@ namespace JWF
 {
 	public class JWFPlayerController : MonoBehaviour
 	{
-		private Transform _CenterOfMass;
 		private Rigidbody _Rigidbody;
+		private Vector3 _SpawnLocation;
 
         private JWFPlayerData _PlayerData = null;
 		public JWFPlayerData PlayerData
@@ -15,23 +15,20 @@ namespace JWF
 			set { _PlayerData = value; }
 		}
 
-        private float _RealignForce = 1600;
+        private float _RealignForce = 1400;
         private float _JumpForce = 700;
-        private float _TiltPower = 2000;
-        private float _MomentumForce = 200;
+		private float _AirControl = 400;
+        private float _TiltPower = 1500;
         private bool _Grounded = false;
-        private Vector3 _StartCenterOfMass;
         private bool _ShouldTiltLeft = false;
         private bool _ShouldTiltRight = false;
+		private float _SpawnDelay = 2.0f;
+
+		private TimerHandle _RespawnTimer = new TimerHandle();
 
         void Start()
         {
             _Rigidbody = gameObject.GetComponent<Rigidbody>();
-            _CenterOfMass = transform.FindChild("CenterOfMass");
-            _StartCenterOfMass = _Rigidbody.centerOfMass;
-            if (_CenterOfMass == null)
-                Debug.LogError("No Center of Mass Found! on Player " + PlayerData.ID);
-            _Rigidbody.centerOfMass = _CenterOfMass.position - transform.position;
         }
 
         void FixedUpdate()
@@ -98,35 +95,26 @@ namespace JWF
 		void TiltLeft()
 		{
             _Rigidbody.AddTorque(Vector3.forward * _TiltPower);
-        }
-
-        void MomentumLeft()
-        {
-            _Rigidbody.AddForceAtPosition (Vector3.left* _TiltPower, transform.position);
+			_Rigidbody.AddForce( Vector3.left * _AirControl );
         }
 
         void TiltRight()
 		{
             _Rigidbody.AddTorque(-Vector3.forward * _TiltPower);
-        }
+			_Rigidbody.AddForce( Vector3.right * _AirControl );
+		}
 
-        void MomentumRight()
-        {
-            _Rigidbody.AddForceAtPosition (Vector3.right * _TiltPower, transform.position);
-        }
-
-        void OnCollisionStay(Collision c)
+		void OnCollisionStay(Collision c)
 		{
             if (!c.gameObject.CompareTag("Ball"))
             {
                 _Grounded = true;
-            }
+			}
 		}
 
 		void OnCollisionExit(Collision c)
 		{
 			_Grounded = false;
-            _Rigidbody.centerOfMass = _StartCenterOfMass;
 		}
 
 		void OnCollisionEnter(Collision c)
@@ -134,13 +122,29 @@ namespace JWF
 			if (c.gameObject.CompareTag("Killzone"))
 			{
 				// Player died.
-
+				PlayerDied();
 			}
+		}
+
+		void PlayerDied()
+		{
+			_Rigidbody.isKinematic = true;
+			transform.GetComponent<CapsuleCollider>().enabled = false;
+			transform.GetComponent<MeshRenderer>().enabled = false;
+			transform.position = _SpawnLocation;
+			TimerManager.Get.SetTimer( _RespawnTimer, Respawn, _SpawnDelay, false );
 		}
 
         void Respawn()
         {
+			transform.GetComponent<CapsuleCollider>().enabled = true;
+			transform.GetComponent<MeshRenderer>().enabled = true;
+			_Rigidbody.isKinematic = false;
+		}
 
-        }
+		public void SetSpawnLocation(Vector3 spawnLocation)
+		{
+			_SpawnLocation = spawnLocation;
+		}
 	}
 }

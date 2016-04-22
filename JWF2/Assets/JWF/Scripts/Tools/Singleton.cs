@@ -17,7 +17,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
 	
 	protected static bool ApplicationIsQuitting = false;
 
-	public void Create()
+	public virtual void Init()
 	{
 		// Literally Does nothing.
 	}
