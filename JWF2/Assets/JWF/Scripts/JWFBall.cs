@@ -29,12 +29,6 @@ namespace JWF
 			_LastTouch = 0;
 			GetComponent<Rigidbody>().velocity = Vector3.zero;
 			transform.position = SpawnPosition;
-			gameObject.SetActive( false );
-		}
-
-		public static void RespawnBall(GameObject ball)
-		{
-			ball.SetActive( true );
 		}
 	}
 }

@@ -29,7 +29,7 @@ namespace JWF
 		private float _RespawnBallDelay = 1.5f;
 
 		private TimerHandle _ReturnToMenuHandle = new TimerHandle();
-		private TimerHandle _RespawnBallHandle = new TimerHandle();
+		private TimerHandle _ReturnFromSlowMoHandle = new TimerHandle();
 
 		public override void Init()
 		{
@@ -89,14 +89,13 @@ namespace JWF
 
 		public void SlowMo()
 		{
-			TimerManager.Get.SetTimer( _RespawnBallHandle, RespawnBall, _RespawnBallDelay );
+			TimerManager.Get.SetTimer( _ReturnFromSlowMoHandle, ReturnTimeScale, _RespawnBallDelay );
 			Time.timeScale = 0.3f;
 		}
 		
-		public void RespawnBall()
+		public void ReturnTimeScale()
 		{
 			Time.timeScale = 1.0f;
-			JWFBall.RespawnBall( _Ball );
 		}
 
 		public int GetScore(PlayerTeam team)
