@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-namespace JWF
+namespace JWF.ClassicMap
 {
-	public class JWFGoal : MonoBehaviour
+	public class JWFClassicMapGoal : MonoBehaviour
 	{
 		public PlayerTeam OwningGoal = PlayerTeam.Blue;
 
@@ -11,8 +10,8 @@ namespace JWF
 		{
 			if ( c.gameObject.CompareTag( "Ball" ) )
 			{
-				int lastTouch = c.gameObject.GetComponent<JWFBall>().GetLastTouch();
-				BallScored(lastTouch);
+				int lastTouch = c.gameObject.GetComponent<JWFClassicMapBall>().GetLastTouch();
+				BallScored( lastTouch );
 			}
 		}
 
@@ -20,7 +19,7 @@ namespace JWF
 		{
 			// HACKY
 			PlayerTeam teamGetsScore = OwningGoal == PlayerTeam.Red ? PlayerTeam.Blue : PlayerTeam.Red;
-			JWFScoreManager.Get.AddScore( playerId , teamGetsScore );
+			JWFClassicMapScoreManager.Get.AddScore( playerId, teamGetsScore );
 		}
 	}
 }

@@ -74,11 +74,12 @@ namespace JWF
 
 			actions.Start.AddDefaultBinding( InputControlType.Start );
 			actions.Start.AddDefaultBinding( Key.PadEnter );
+			actions.Start.AddDefaultBinding( InputControlType.Action1 );
 
 			actions.Back.AddDefaultBinding( Key.Backspace );
 
-			actions.Back.AddDefaultBinding( InputControlType.DPadDown );
-			actions.Back.AddDefaultBinding( InputControlType.LeftStickDown );
+			//actions.Back.AddDefaultBinding( InputControlType.DPadDown );
+			//actions.Back.AddDefaultBinding( InputControlType.LeftStickDown );
 			actions.Back.AddDefaultBinding( InputControlType.Action2 );
 			return actions;
 		}

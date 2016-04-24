@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using InControl;
 
-namespace JWF
+namespace JWF.ClassicMap
 {
-	public class JWFPlayerActions : PlayerActionSet
+	public class JWFClassicMapPlayerActions : PlayerActionSet
 	{
 		public PlayerAction Left;
 		public PlayerAction Right;
@@ -12,7 +12,7 @@ namespace JWF
 
 		public PlayerOneAxisAction Horizontal;
 
-		public JWFPlayerActions()
+		public JWFClassicMapPlayerActions()
 		{
 			Left = CreatePlayerAction( "Move Left" );
 			Right = CreatePlayerAction( "Move Right" );
@@ -22,9 +22,9 @@ namespace JWF
 			Horizontal = CreateOneAxisPlayerAction( Left, Right );
 		}
 
-		public static JWFPlayerActions CreateWithKeyboardBindings(int playerID)
+		public static JWFClassicMapPlayerActions CreateWithKeyboardBindings(int playerID)
 		{
-			var actions = new JWFPlayerActions();
+			var actions = new JWFClassicMapPlayerActions();
 
 			// Bindings for player 1 is default to WASD
 			// Bindings for player 2 is default to Arrow Keys
@@ -51,9 +51,9 @@ namespace JWF
 			return actions;
 		}
 
-		public static JWFPlayerActions CreateWithJoystickBindings(int playerID)
+		public static JWFClassicMapPlayerActions CreateWithJoystickBindings(int playerID)
 		{
-			var actions = new JWFPlayerActions();
+			var actions = new JWFClassicMapPlayerActions();
 
 			// Bindings for player 1 is default to WASD
 			// Bindings for player 2 is default to Arrow Keys

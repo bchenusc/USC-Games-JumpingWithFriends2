@@ -14,13 +14,13 @@ namespace JWF
 	{
 		public JWFMenuActions keyboardListener;
 		public JWFMenuActions joystickListener;
-		JWFCameraManager cameraManager;
+		JWFMenuCamera cameraManager;
 
 		private JWFMenuBase menuState = null /* Default MenuStart in Start()*/;
 
 		void Start()
 		{
-			cameraManager = Camera.main.GetComponent<JWFCameraManager>();
+			cameraManager = Camera.main.GetComponent<JWFMenuCamera>();
 			ChangeStateTo(gameObject.GetComponent<JWFMenuStart>());
 			JWFPlayerManager.Get.Init();
 		}
@@ -31,7 +31,8 @@ namespace JWF
 			{
 				return;
 			}
-
+			joystickListener.ClearInputState();
+			keyboardListener.ClearInputState();
 			menuState = state;
 			cameraManager.MoveCameraTo( menuState.GetCameraPosition() );
 		}
@@ -67,7 +68,7 @@ namespace JWF
 			keyboardListener = JWFMenuActions.CreateWithKeyboardBindings();
 		}
 
-		void OnDisbale()
+		void OnDisable()
 		{
 			joystickListener.Destroy();
 			keyboardListener.Destroy();

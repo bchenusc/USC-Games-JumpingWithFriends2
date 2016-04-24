@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using InControl;
-using System;
+using JWF.ClassicMap;
 
 namespace JWF
 {
@@ -80,7 +80,7 @@ namespace JWF
 
 		public bool ThereIsNoPlayerUsingThisJoystick(InputDevice inputDevice)
 		{
-			return FindPlayerUsingJoystick( inputDevice ).ID == 0;
+			return FindPlayerUsingJoystick( inputDevice ) == null;
 		}
 
 		JWFPlayerData FindPlayerUsingJoystick(InputDevice inputDevice)
@@ -116,8 +116,8 @@ namespace JWF
 			Debug.Log( "Create Keyboard Player " + playerID );
 
 			// Keyboard player for only player 1 and player 2.
-			JWFPlayerActions actions;
-			actions = JWFPlayerActions.CreateWithKeyboardBindings( playerID );
+			JWFClassicMapPlayerActions actions;
+			actions = JWFClassicMapPlayerActions.CreateWithKeyboardBindings( playerID );
 
 			var player = new JWFPlayerData(playerID, actions, DetermineTeam(playerID));
 			_players.Add( player );
@@ -128,6 +128,7 @@ namespace JWF
 		{
 			if ( !ThereIsNoPlayerUsingThisJoystick( inputDevice ) )
 			{
+				Debug.Log( "Device in use" );
 				return null;
 			}
 			Debug.Log( "Create joystick player " + inputDevice );
@@ -135,18 +136,18 @@ namespace JWF
 
 			if ( playerID <= MAX_PLAYERS )
 			{
-				JWFPlayerActions actions;
+				JWFClassicMapPlayerActions actions;
 
 				// Create either keyboard only controls or controller controls!
 				if ( inputDevice == null )
 				{
 					// Keyboard player for only player 1 and player 2.
-					actions = JWFPlayerActions.CreateWithKeyboardBindings( playerID );
+					actions = JWFClassicMapPlayerActions.CreateWithKeyboardBindings( playerID );
 				}
 				else
 				{
 					// Controller
-					actions = JWFPlayerActions.CreateWithJoystickBindings( playerID );
+					actions = JWFClassicMapPlayerActions.CreateWithJoystickBindings( playerID );
 					actions.Device = inputDevice;
 				}
 

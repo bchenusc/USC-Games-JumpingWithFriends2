@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using InControl;
 
 namespace JWF
 {
@@ -11,7 +12,7 @@ namespace JWF
 	public class JWFPlayerData
 	{
 		private int _Id = 0;
-		private JWFPlayerActions _Actions = null;
+		private PlayerActionSet _Actions = null;
 		private PlayerTeam _Team;
 		private Material _Primary;
 		private Material _Secondary;
@@ -22,7 +23,7 @@ namespace JWF
 			private set { _Id = value; }
 		}
 
-		public JWFPlayerActions Actions
+		public PlayerActionSet Actions
 		{
 			get { return _Actions; }
 			private set { _Actions = value; }
@@ -46,7 +47,7 @@ namespace JWF
 			set { _Secondary = value; }
 		}
 
-		public JWFPlayerData(int id, JWFPlayerActions action, PlayerTeam team)
+		public JWFPlayerData(int id, PlayerActionSet action, PlayerTeam team)
 		{
 			ID = id;
 			Actions = action;

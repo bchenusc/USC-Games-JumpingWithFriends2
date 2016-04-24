@@ -2,13 +2,20 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-namespace JWF
+namespace JWF.ClassicMap
 {
-
 	public class JWFClassicMapInit : MonoBehaviour
 	{
-		private const string INTRO_TEXT_CHILD_NAME = "Text";
 		private const string BALL_TAG = "Ball";
+
+		private static int CLASSIC_MAP = 1;
+		private static int TWO_PLAYERS = 2;
+		private static int FOUR_PLAYERS = 4;
+
+		private const int PLAYER_1 = 1;
+		private const int PLAYER_2 = 2;
+		private const int PLAYER_3 = 3;
+		private const int PLAYER_4 = 4;
 
 		// Prefab used to spawn the player into the game.
 		public GameObject PlayerPrefab;
@@ -20,19 +27,14 @@ namespace JWF
 		public Text BlueScoreText = null;
 		public Text RedScoreText = null;
 		public GameObject IntroText = null;
-		private Text _IntroText = null;
+		public Text IntroTextChild = null;
 		public GameObject WinText = null;
-		public GameObject _Ball;
+		public Text WinTextChild = null;
 
+		public JWFClassicMapCamera CameraManager;
 
-		private static int CLASSIC_MAP = 1;
-		private static int TWO_PLAYERS = 2;
-		private static int FOUR_PLAYERS = 4;
-
-		private const int PLAYER_1 = 1;
-		private const int PLAYER_2 = 2;
-		private const int PLAYER_3 = 3;
-		private const int PLAYER_4 = 4;
+		private GameObject _Ball;
+		public GameObject Ball { get { return _Ball; } }
 
 		private List<Vector3> _SpawnLocations = new List<Vector3>()
 		{
@@ -53,9 +55,8 @@ namespace JWF
 		{
 			if ( level == CLASSIC_MAP )
 			{
-				_IntroText = IntroText.transform.FindChild( INTRO_TEXT_CHILD_NAME ).GetComponent<Text>();
 				_Ball = GameObject.FindWithTag( BALL_TAG );
-				JWFScoreManager.Get.Init( this );
+				JWFClassicMapScoreManager.Get.Init( this );
 				IntroText.SetActive( true );
 				WinText.SetActive( false );
 				TimerManager.Get.SetTimer( _IntroSeq1Handle, IntroSeq1, _IntroSeq1Delay );
@@ -79,7 +80,7 @@ namespace JWF
 				StartGame();
 			}
 			int time =  _CountdownMax - _IntroSeqCountdownFucntionCounter;
-			_IntroText.text = time.ToString();
+			IntroTextChild.text = time.ToString();
 		}
 
 		void StartGame()
@@ -113,13 +114,13 @@ namespace JWF
 		void SpawnPlayer(JWFPlayerData player, Vector3 position)
 		{
 			GameObject clone = Instantiate(PlayerPrefab, position, PlayerPrefab.transform.rotation) as GameObject;
-			JWFPlayerController controller = clone.GetComponent<JWFPlayerController>();
+			JWFClassicMapPlayerController controller = clone.GetComponent<JWFClassicMapPlayerController>();
 			controller.PlayerData = player;
 			HACK_SwitchColor( player.ID, clone, controller );
 			controller.SetSpawnLocation( position );
 		}
 
-		void HACK_SwitchColor(int playerID, GameObject player, JWFPlayerController controller)
+		void HACK_SwitchColor(int playerID, GameObject player, JWFClassicMapPlayerController controller)
 		{
 			MeshRenderer renderer = player.GetComponent<MeshRenderer>();
 			Material[] mats = renderer.materials;

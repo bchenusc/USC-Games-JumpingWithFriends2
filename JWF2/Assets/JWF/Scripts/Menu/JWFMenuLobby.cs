@@ -159,7 +159,9 @@ namespace JWF
 
 		JWFPlayerData CreateJoystickPlayer(InputDevice inputDevice)
 		{
-			return JWFPlayerManager.Get.CreateJoystickPlayer( inputDevice );
+			JWFPlayerData data = JWFPlayerManager.Get.CreateJoystickPlayer( inputDevice );
+			PlayerStatues[data.ID-1].SetActive( true );
+			return data;
 		}
 
 		JWFPlayerData CreateKeyboardPlayer(int playerID)

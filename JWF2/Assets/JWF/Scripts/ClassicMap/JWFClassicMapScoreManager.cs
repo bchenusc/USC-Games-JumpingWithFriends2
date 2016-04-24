@@ -1,16 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-
-namespace JWF
+namespace JWF.ClassicMap
 {
-	public class JWFScoreManager : Singleton<JWFScoreManager>
+	public class JWFClassicMapScoreManager : Singleton<JWFClassicMapScoreManager>
 	{
 		private const int _MaxScore = 5;
 		private const string WIN_STRING = " Team Wins!";
 		private const string RED_STRING = "Red";
 		private const string BLUE_STRING = "Blue";
-		private const string WIN_TEXT_CHILD_NAME = "Text";
+		private const string SCORED_STRING = " Scored!";
+		private const string OWNGOAL_STRING = " Own Goal!";
+		private const string PLAYER_STRING = "Player ";
+
+		private const float _SlowMoSpeed = 0.27f;
+		private const float _NormalTimeSpeed = 1.0f;
+
+		private const float _EndOfGameDelayToMenu = 8.0f;
+		private const float _RespawnBallDelay = 1.5f;
 
 		int _P1Score = 0;
 		int _P2Score = 0;
@@ -20,16 +27,18 @@ namespace JWF
 		int _BlueScore = 0;
 		int _RedScore = 0;
 
+		// Set in Init()
 		private Text _BlueScoreText = null;
 		private Text _RedScoreText = null;
 		private GameObject _WinText = null;
 		private GameObject _Ball = null;
-
-		private float _EndOfGameDelayToMenu = 1.0f;
-		private float _RespawnBallDelay = 1.5f;
+		private JWFClassicMapCamera _CameraManager = null;
+		private Text _WinTextChild = null;
 
 		private TimerHandle _ReturnToMenuHandle = new TimerHandle();
 		private TimerHandle _ReturnFromSlowMoHandle = new TimerHandle();
+
+		private bool _GameOver = false;
 
 		public override void Init()
 		{
@@ -41,7 +50,9 @@ namespace JWF
 			_BlueScoreText = initScript.BlueScoreText;
 			_RedScoreText = initScript.RedScoreText;
 			_WinText = initScript.WinText;
-			_Ball = initScript._Ball;
+			_WinTextChild = initScript.WinTextChild;
+			_Ball = initScript.Ball;
+			_CameraManager = initScript.CameraManager;
 
 			_BlueScore = _MaxScore;
 			_RedScore = _MaxScore;
@@ -53,10 +64,12 @@ namespace JWF
 			switch ( team )
 			{
 				case PlayerTeam.Red:
+				_CameraManager.GoalScoredCameraBM( PlayerTeam.Blue );
 				--_RedScore;
 				break;
 
 				case PlayerTeam.Blue:
+				_CameraManager.GoalScoredCameraBM( PlayerTeam.Red );
 				--_BlueScore;
 				break;
 			}
@@ -83,19 +96,39 @@ namespace JWF
 				}
 			}
 			UpdateScore();
-			CheckIfGameOver();
+			_GameOver = CheckIfGameOver();
+			if ( !_GameOver )
+			{
+				ShowWhoScored( playerId, team );
+			}
 			SlowMo();
+		}
+
+		public void ShowWhoScored(int playerId, PlayerTeam teamThatGotPoint)
+		{
+			PlayerTeam playersTeam = JWFPlayerManager.Get.GetPlayerTeam(playerId);
+			bool isOwnGoal = playersTeam != teamThatGotPoint;
+			Color bannerColor = playersTeam == PlayerTeam.Red ? Color.red : Color.blue;
+			string goaledString = isOwnGoal == true ? OWNGOAL_STRING : SCORED_STRING;
+			string output = PLAYER_STRING + playerId + goaledString;
+			_WinTextChild.text = output;
+			_WinText.transform.GetComponent<Image>().color = bannerColor;
+			_WinText.SetActive( true );
 		}
 
 		public void SlowMo()
 		{
 			TimerManager.Get.SetTimer( _ReturnFromSlowMoHandle, ReturnTimeScale, _RespawnBallDelay );
-			Time.timeScale = 0.3f;
+			Time.timeScale = _SlowMoSpeed;
 		}
-		
+
 		public void ReturnTimeScale()
 		{
-			Time.timeScale = 1.0f;
+			if ( !_GameOver )
+			{
+				_WinText.SetActive( false );
+			}
+			Time.timeScale = _NormalTimeSpeed;
 		}
 
 		public int GetScore(PlayerTeam team)
@@ -117,23 +150,26 @@ namespace JWF
 			_RedScoreText.text = _RedScore.ToString();
 		}
 
-		private void CheckIfGameOver()
+		private bool CheckIfGameOver()
 		{
 			if ( _BlueScore == 0 )
 			{
 				GameOver( PlayerTeam.Blue );
+				return true;
 			}
 			else if ( _RedScore == 0 )
 			{
 				GameOver( PlayerTeam.Red );
+				return true;
 			}
+			return false;
 		}
 
 		private void GameOver(PlayerTeam winner)
 		{
 			string winningTeam = winner == PlayerTeam.Red ? RED_STRING : BLUE_STRING;
 			Color teamColor = winner == PlayerTeam.Red? Color.red : Color.blue;
-			_WinText.transform.FindChild( WIN_TEXT_CHILD_NAME ).GetComponent<Text>().text = winningTeam + WIN_STRING;
+			_WinTextChild.text = winningTeam + WIN_STRING;
 			_WinText.transform.GetComponent<Image>().color = teamColor;
 			_WinText.SetActive( true );
 			_Ball.SetActive( false );
