@@ -23,7 +23,9 @@ namespace JWF
 
 		public virtual void RightPressed() { }
 
-		public virtual void EnterPressed() { }
+		public virtual void AcceptPressed() { }
+
+		public virtual void StartPressed() { }
 
 		public virtual void BackPressed() { }
 

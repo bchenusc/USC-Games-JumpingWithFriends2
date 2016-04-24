@@ -33,7 +33,7 @@ namespace JWF
 			return JWFMenuState.MenuOptions;
 		}
 
-		public override void EnterPressed()
+		public override void AcceptPressed()
 		{
 			_MenuManager.ChangeStateTo( _OptionsMenuStates[(int) _State] );
 		}

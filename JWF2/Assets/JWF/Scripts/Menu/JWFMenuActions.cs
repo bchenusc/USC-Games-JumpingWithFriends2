@@ -9,12 +9,15 @@ namespace JWF
 		public PlayerAction Left;
 		public PlayerAction Right;
 		public PlayerAction Jump;
+
 		public PlayerAction Start;
-		public PlayerAction P1Start;
-		public PlayerAction P2Start;
-		public PlayerAction P1Back;
-		public PlayerAction P2Back;
+		public PlayerAction Accept;
 		public PlayerAction Back;
+
+		public PlayerAction Keyboard1A;
+		public PlayerAction Keyboard1B;
+		public PlayerAction Keyboard2A;
+		public PlayerAction Keyboard2B;
 
 		public JWFMenuActions()
 		{
@@ -23,11 +26,14 @@ namespace JWF
 			Jump = CreatePlayerAction( "Jump" );
 
 			Start = CreatePlayerAction( "Start" );
-			P1Start = CreatePlayerAction( "P1Start" );
-			P2Start = CreatePlayerAction( "P2Start" );
 
-			P1Back = CreatePlayerAction( "P1Back" );
-			P2Back = CreatePlayerAction( "P2Back" );
+			Keyboard1A = CreatePlayerAction( "Keyboard1A" );
+			Keyboard2A = CreatePlayerAction( "Keyboard2A" );
+
+			Keyboard1B = CreatePlayerAction( "Keyboard1B" );
+			Keyboard2B = CreatePlayerAction( "Keyboard2B" );
+
+			Accept = CreatePlayerAction( "Accept" );
 			Back = CreatePlayerAction( "Back" );
 		}
 
@@ -35,18 +41,20 @@ namespace JWF
 		{
 			var actions = new JWFMenuActions();
 			// Used in menus that are player ambiguous.
-			actions.P1Start.AddDefaultBinding( Key.W );
-			actions.P2Start.AddDefaultBinding( Key.UpArrow );
 			actions.Start.AddDefaultBinding( Key.PadEnter );
 			actions.Start.AddDefaultBinding( Key.Return );
 
+			actions.Keyboard1A.AddDefaultBinding( Key.W );
+			actions.Keyboard2A.AddDefaultBinding( Key.UpArrow );
+
 			actions.Back.AddDefaultBinding( Key.Backspace );
-			actions.P1Back.AddDefaultBinding( Key.S );
-			actions.P2Back.AddDefaultBinding( Key.DownArrow );
+			actions.Keyboard1B.AddDefaultBinding( Key.S );
+			actions.Keyboard2B.AddDefaultBinding( Key.DownArrow );
 
 			actions.Left.AddDefaultBinding( Key.A );
 			actions.Right.AddDefaultBinding( Key.D );
 			actions.Jump.AddDefaultBinding( Key.W );
+
 			actions.Left.AddDefaultBinding( Key.LeftArrow );
 			actions.Right.AddDefaultBinding( Key.RightArrow );
 			actions.Jump.AddDefaultBinding( Key.UpArrow );
@@ -72,14 +80,10 @@ namespace JWF
 			actions.Right.AddDefaultBinding( InputControlType.DPadRight );
 			actions.Jump.AddDefaultBinding( InputControlType.DPadUp );
 
-			actions.Start.AddDefaultBinding( InputControlType.Start );
+			actions.Start.AddDefaultBinding( InputControlType.Command );
 			actions.Start.AddDefaultBinding( Key.PadEnter );
-			actions.Start.AddDefaultBinding( InputControlType.Action1 );
 
-			actions.Back.AddDefaultBinding( Key.Backspace );
-
-			//actions.Back.AddDefaultBinding( InputControlType.DPadDown );
-			//actions.Back.AddDefaultBinding( InputControlType.LeftStickDown );
+			actions.Accept.AddDefaultBinding( InputControlType.Action1 );
 			actions.Back.AddDefaultBinding( InputControlType.Action2 );
 			return actions;
 		}

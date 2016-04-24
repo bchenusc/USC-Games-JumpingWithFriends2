@@ -39,9 +39,14 @@ namespace JWF
 
 		void Update()
 		{
-			if ( EnterWasPressed( joystickListener ) || EnterWasPressed( keyboardListener ) )
+			if ( AcceptWasPressed( joystickListener ) || AcceptWasPressed( keyboardListener ) )
 			{
-				menuState.EnterPressed();
+				menuState.AcceptPressed();
+			}
+
+			if ( StartWasPressed( joystickListener ) || StartWasPressed( keyboardListener ) )
+			{
+				menuState.StartPressed();
 			}
 
 			if ( LeftWasPressed( joystickListener ) || LeftWasPressed( keyboardListener ) )
@@ -74,7 +79,12 @@ namespace JWF
 			keyboardListener.Destroy();
 		}
 
-		bool EnterWasPressed(JWFMenuActions actions)
+		bool AcceptWasPressed(JWFMenuActions actions)
+		{
+			return actions.Accept.WasPressed;
+		}
+
+		bool StartWasPressed(JWFMenuActions actions)
 		{
 			return actions.Start.WasPressed;
 		}

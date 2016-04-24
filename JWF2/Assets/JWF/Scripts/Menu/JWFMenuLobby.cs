@@ -13,8 +13,8 @@ namespace JWF
 		public GameObject[] JoinInfoPanels;
 		public GameObject[] PlayerStatues;
 
-		private static string OneVOne = "Play One-Versus-One";
-		private static string TwoVTwo = "Play Two-Versus-Two";
+		private static string OneVOne = "Press Start When Ready!";
+		private static string TwoVTwo = "Press Start When Ready!";
 		private static string Waiting = "Waiting for Players...";
 
 		bool _ReadyToTransitionToGame = false;
@@ -50,7 +50,7 @@ namespace JWF
 			return JWFMenuState.MenuLobby;
 		}
 
-		public override void EnterPressed()
+		public override void StartPressed()
 		{
 			if ( _ReadyToTransitionToGame )
 			{
@@ -103,20 +103,20 @@ namespace JWF
 
 		bool JoinButtonWasPressedOnListener(JWFMenuActions actions)
 		{
-			return actions.Start.WasPressed;
+			return actions.Accept.WasPressed;
 		}
 
 		int JoinButtonWasPressedOnKeyboard(JWFMenuActions actions)
 		{
-			if ( actions.P1Start.WasPressed ) return 1;
-			if ( actions.P2Start.WasPressed ) return 2;
+			if ( actions.Keyboard1A.WasPressed ) return 1;
+			if ( actions.Keyboard2A.WasPressed ) return 2;
 			return 0;
 		}
 
 		int RemoveButtonWasPressedOnKeybaord(JWFMenuActions actions)
 		{
-			if ( actions.P1Back.WasPressed ) return 1;
-			if ( actions.P2Back.WasPressed ) return 2;
+			if ( actions.Keyboard1B.WasPressed ) return 1;
+			if ( actions.Keyboard2B.WasPressed ) return 2;
 			return 0;
 		}
 

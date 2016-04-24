@@ -73,8 +73,8 @@ namespace JWF
 
 		int JoinButtonWasPressedOnKeyboard(JWFMenuActions actions)
 		{
-			if ( actions.P1Start.WasPressed ) return 1;
-			if ( actions.P2Start.WasPressed ) return 2;
+			if ( actions.Keyboard1A.WasPressed ) return 1;
+			if ( actions.Keyboard2A.WasPressed ) return 2;
 			return 0;
 		}
 
