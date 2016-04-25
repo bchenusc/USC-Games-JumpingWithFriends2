@@ -13,7 +13,7 @@ namespace JWF.ClassicMap
 		private AudioSource JumpingSoundAudioSource;
 
 		private float FallingSoundVolume = 0.1f;
-		private float JumpingSoundVolume = 0.05f;
+		private float JumpingSoundVolume = 0.025f;
 		private float ThumpSoundVolume = 0.1f;
 
 		private bool _PlayFallSoundOnce = false;

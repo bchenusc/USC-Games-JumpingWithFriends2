@@ -30,6 +30,7 @@ namespace JWF.ClassicMap
 		public Text WinTextChild = null;
 
 		public JWFClassicMapCamera CameraManager;
+		private JWFClassicMapInitSounds _MapInitSounds;
 
 		private GameObject _Ball;
 		public GameObject Ball { get { return _Ball; } }
@@ -53,6 +54,7 @@ namespace JWF.ClassicMap
 		{
 			if ( level == CLASSIC_MAP )
 			{
+				_MapInitSounds = gameObject.GetComponent<JWFClassicMapInitSounds>();
 				_Ball = GameObject.FindWithTag( GameStatics.BALL_TAG );
 				JWFClassicMapScoreManager.Get.Init( this );
 				IntroText.SetActive( true );
@@ -67,7 +69,7 @@ namespace JWF.ClassicMap
 			TimerManager.Get.SetTimer( _CountdownHandle, IntroSeqCountdown, _CountdownHandleDelay, true );
 		}
 
-		// Happens every second with a countdown of 3.
+		// 3..2..1 counter happens every 1 second interval.
 		private int _IntroSeqCountdownFucntionCounter = -1;
 		void IntroSeqCountdown()
 		{
@@ -76,13 +78,16 @@ namespace JWF.ClassicMap
 			{
 				TimerManager.Get.ClearTimer( _CountdownHandle );
 				StartGame();
+				return;
 			}
+			_MapInitSounds.PlayCountdown();
 			int time =  _CountdownMax - _IntroSeqCountdownFucntionCounter;
 			IntroTextChild.text = time.ToString();
 		}
 
 		void StartGame()
 		{
+			_MapInitSounds.PlayWhistle();
 			IntroText.SetActive( false );
 			PlayerSpawner();
 			_Ball.GetComponent<Rigidbody>().isKinematic = false;
