@@ -1,0 +1,38 @@
+Design
+Brian Chen
+
+Engineering
+Brian Chen
+
+Art
+Brian Chen
+
+Music
+"Pixelland" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 3.0 License
+http://creativecommons.org/licenses/by/3.0/
+
+SFX
+"cheer_01.wav" Corisca_S (https://www.freesound.org/people/Corsica_S/sounds/337000/)
+Licensed under Creative Commons: By Attribution 3.0 Unported
+http://creativecommons.org/licenses/by/3.0/
+Changes: Pitch, Duration, Speed
+
+"Annoying_Air_Sire.flac" qubodup (https://www.freesound.org/people/qubodup/sounds/184937/)
+Licensed under Creative Commons: By Attribution 3.0 Unported
+http://creativecommons.org/licenses/by/3.0/
+Changes: Pitch, Duration
+
+"good_kick_in_the_head_sound.aif" mwl500 (https://www.freesound.org/people/mwl500/sounds/54807/)
+Licensed under Creative Commons: By Attribution 3.0 Unported
+http://creativecommons.org/licenses/by/3.0/
+Changes: Pitch, Duration, Speed
+
+"falling_whistle_swish_1.wav" blukotek (https://www.freesound.org/people/blukotek/sounds/268914/)
+CC0 1.0 Universal License: Public Domain Dedication
+http://creativecommons.org/publicdomain/zero/1.0/
+Changes: Pitch, Duration, Speed
+
+
+
+
