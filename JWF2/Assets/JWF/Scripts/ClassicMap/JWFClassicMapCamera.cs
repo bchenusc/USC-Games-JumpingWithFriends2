@@ -23,13 +23,11 @@ namespace JWF.ClassicMap
 			{
 				case PlayerTeam.Red:
 				NextCameraRed();
-				_MainCamera.SetActive( false );
 				TimerManager.Get.SetTimer( _CameraSwitchHandle, NextCameraRed, _CameraSwitchRate, true );
 				break;
 
 				case PlayerTeam.Blue:
 				NextCameraBlue();
-				_MainCamera.SetActive( false );
 				TimerManager.Get.SetTimer( _CameraSwitchHandle, NextCameraBlue, _CameraSwitchRate, true );
 				break;
 			}
@@ -62,7 +60,7 @@ namespace JWF.ClassicMap
 			GameObject[] cams = team == PlayerTeam.Red ? RedGoalCameras : BlueGoalCameras;
 			_CurrentCamera = -1;
 			TimerManager.Get.ClearTimer( _CameraSwitchHandle );
-			_MainCamera.SetActive( true );
+			Camera.SetupCurrent(_MainCamera.GetComponent<Camera>());
 			foreach ( GameObject cam in cams )
 			{
 				cam.SetActive( false );

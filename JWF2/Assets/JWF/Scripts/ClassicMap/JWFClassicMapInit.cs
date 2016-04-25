@@ -6,8 +6,6 @@ namespace JWF.ClassicMap
 {
 	public class JWFClassicMapInit : MonoBehaviour
 	{
-		private const string BALL_TAG = "Ball";
-
 		private static int CLASSIC_MAP = 1;
 		private static int TWO_PLAYERS = 2;
 		private static int FOUR_PLAYERS = 4;
@@ -55,7 +53,7 @@ namespace JWF.ClassicMap
 		{
 			if ( level == CLASSIC_MAP )
 			{
-				_Ball = GameObject.FindWithTag( BALL_TAG );
+				_Ball = GameObject.FindWithTag( GameStatics.BALL_TAG );
 				JWFClassicMapScoreManager.Get.Init( this );
 				IntroText.SetActive( true );
 				WinText.SetActive( false );

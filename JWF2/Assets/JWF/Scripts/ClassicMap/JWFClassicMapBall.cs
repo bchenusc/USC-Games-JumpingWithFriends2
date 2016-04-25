@@ -20,11 +20,11 @@ namespace JWF.ClassicMap
 
 		void OnCollisionEnter(Collision c)
 		{
-			if ( c.gameObject.CompareTag( "Killzone" ) )
+			if ( c.gameObject.CompareTag( GameStatics.KILLZONE_TAG ) )
 			{
 				BallDied();
 			}
-			else if ( c.gameObject.CompareTag( "Player" ) )
+			else if ( c.gameObject.CompareTag( GameStatics.PLAYER_TAG ) )
 			{
 				JWFClassicMapPlayerController controller =  c.gameObject.GetComponent<JWFClassicMapPlayerController>();
 				_LastTouch = controller.PlayerData.ID;

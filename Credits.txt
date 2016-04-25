@@ -12,18 +12,22 @@ Music
 Licensed under Creative Commons: By Attribution 3.0 License
 http://creativecommons.org/licenses/by/3.0/
 
+"Vivacity" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 3.0 License
+http://creativecommons.org/licenses/by/3.0/
+
 SFX
-"cheer_01.wav" Corisca_S (https://www.freesound.org/people/Corsica_S/sounds/337000/)
+"Annoying_Air_Siren.flac" qubodup (https://www.freesound.org/people/qubodup/sounds/184937/)
 Licensed under Creative Commons: By Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
 Changes: Pitch, Duration, Speed
 
-"Annoying_Air_Sire.flac" qubodup (https://www.freesound.org/people/qubodup/sounds/184937/)
+"camera_snap1.wav" thecheesman (https://www.freesound.org/people/thecheeseman/sounds/51360/)
 Licensed under Creative Commons: By Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
-Changes: Pitch, Duration
+Changes: Pitch, Duration, Speed
 
-"good_kick_in_the_head_sound.aif" mwl500 (https://www.freesound.org/people/mwl500/sounds/54807/)
+"cheer_01.wav" Corisca_S (https://www.freesound.org/people/Corsica_S/sounds/337000/)
 Licensed under Creative Commons: By Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
 Changes: Pitch, Duration, Speed
@@ -33,6 +37,25 @@ CC0 1.0 Universal License: Public Domain Dedication
 http://creativecommons.org/publicdomain/zero/1.0/
 Changes: Pitch, Duration, Speed
 
+"good_kick_in_the_head_sound.aif" mwl500 (https://www.freesound.org/people/mwl500/sounds/54807/)
+Licensed under Creative Commons: By Attribution 3.0 Unported
+http://creativecommons.org/licenses/by/3.0/
+Changes: Pitch, Duration, Speed
+
+"jump-03.wav" littlerobotsoundfactory (https://www.freesound.org/people/LittleRobotSoundFactory/sounds/270323/)
+Licensed under Creative Commons: By Attribution 3.0 Unported
+http://creativecommons.org/licenses/by/3.0/
+Changes: Pitch, Duration, Speed
+
+"Jump.wav" n_audioman https://www.freesound.org/people/n_audioman/sounds/273560/
+Licensed under Creative Commons: By Attribution 3.0 Unported
+http://creativecommons.org/licenses/by/3.0/
+Changes: Pitch, Duration, Speed
+
+"Jump16.wav" n_audioman (https://www.freesound.org/people/n_audioman/sounds/273567/)
+Licensed under Creative Commons: By Attribution 3.0 Unported
+http://creativecommons.org/licenses/by/3.0/
+Changes: Pitch, Duration, Speed
 
 
 

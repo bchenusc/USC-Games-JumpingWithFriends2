@@ -5,6 +5,7 @@ namespace JWF.ClassicMap
 	public class JWFClassicMapPlayerController : MonoBehaviour
 	{
 		private Rigidbody _Rigidbody;
+		private JWFClassicMapPlayerSounds _PlayerSounds;
 		private Vector3 _SpawnLocation;
 
 		private JWFPlayerData _PlayerData = null;
@@ -28,6 +29,7 @@ namespace JWF.ClassicMap
 		void Start()
 		{
 			_Rigidbody = gameObject.GetComponent<Rigidbody>();
+			_PlayerSounds = gameObject.GetComponent<JWFClassicMapPlayerSounds>();
 		}
 
 		void FixedUpdate()
@@ -88,8 +90,14 @@ namespace JWF.ClassicMap
 		{
 			if ( _Grounded )
 			{
+				PerformJump_SFX();
 				_Rigidbody.AddForce( transform.up * _JumpForce, ForceMode.Impulse );
 			}
+		}
+
+		void PerformJump_SFX()
+		{
+			_PlayerSounds.PlayJumpSound();
 		}
 
 		void TiltLeft()
@@ -106,7 +114,7 @@ namespace JWF.ClassicMap
 
 		void OnCollisionStay(Collision c)
 		{
-			if ( !c.gameObject.CompareTag( "Ball" ) )
+			if ( !c.gameObject.CompareTag( GameStatics.BALL_TAG ) )
 			{
 				_Grounded = true;
 			}
@@ -119,9 +127,8 @@ namespace JWF.ClassicMap
 
 		void OnCollisionEnter(Collision c)
 		{
-			if ( c.gameObject.CompareTag( "Killzone" ) )
+			if ( c.gameObject.CompareTag( GameStatics.KILLZONE_TAG ) )
 			{
-				// Player died.
 				PlayerDied();
 			}
 		}
@@ -137,6 +144,7 @@ namespace JWF.ClassicMap
 
 		void Respawn()
 		{
+			_PlayerSounds.ResetPlayFallingSound();
 			transform.GetComponent<CapsuleCollider>().enabled = true;
 			transform.GetComponent<MeshRenderer>().enabled = true;
 			_Rigidbody.isKinematic = false;

@@ -43,6 +43,8 @@ namespace JWF
 			// Used in menus that are player ambiguous.
 			actions.Start.AddDefaultBinding( Key.PadEnter );
 			actions.Start.AddDefaultBinding( Key.Return );
+			actions.Accept.AddDefaultBinding( Key.PadEnter );
+			actions.Accept.AddDefaultBinding( Key.Return );
 
 			actions.Keyboard1A.AddDefaultBinding( Key.W );
 			actions.Keyboard2A.AddDefaultBinding( Key.UpArrow );
