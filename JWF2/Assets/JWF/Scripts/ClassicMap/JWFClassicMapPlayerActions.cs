@@ -8,7 +8,8 @@ namespace JWF.ClassicMap
 		public PlayerAction Left;
 		public PlayerAction Right;
 		public PlayerAction Jump;
-		public PlayerAction Start;
+		public PlayerAction StartCommand;
+		public PlayerAction Accept;
 
 		public PlayerOneAxisAction Horizontal;
 
@@ -17,7 +18,8 @@ namespace JWF.ClassicMap
 			Left = CreatePlayerAction( "Move Left" );
 			Right = CreatePlayerAction( "Move Right" );
 			Jump = CreatePlayerAction( "Jump" );
-			Start = CreatePlayerAction( "Start" );
+			StartCommand = CreatePlayerAction( "StartCommand" );
+			Accept = CreatePlayerAction( "Accept" );
 
 			Horizontal = CreateOneAxisPlayerAction( Left, Right );
 		}
@@ -34,14 +36,18 @@ namespace JWF.ClassicMap
 				actions.Left.AddDefaultBinding( Key.A );
 				actions.Right.AddDefaultBinding( Key.D );
 				actions.Jump.AddDefaultBinding( Key.W );
-				actions.Start.AddDefaultBinding( Key.W );
+				actions.StartCommand.AddDefaultBinding( Key.Escape );
+				actions.Accept.AddDefaultBinding( Key.PadEnter );
+				actions.Accept.AddDefaultBinding( Key.Return );
 			}
 			else if ( playerID == 2 )
 			{
 				actions.Left.AddDefaultBinding( Key.LeftArrow );
 				actions.Right.AddDefaultBinding( Key.RightArrow );
 				actions.Jump.AddDefaultBinding( Key.UpArrow );
-				actions.Start.AddDefaultBinding( Key.UpArrow );
+				actions.StartCommand.AddDefaultBinding( Key.Escape );
+				actions.Accept.AddDefaultBinding( Key.PadEnter );
+				actions.Accept.AddDefaultBinding( Key.Return );
 			}
 			else
 			{
@@ -63,12 +69,18 @@ namespace JWF.ClassicMap
 				actions.Left.AddDefaultBinding( Key.A );
 				actions.Right.AddDefaultBinding( Key.D );
 				actions.Jump.AddDefaultBinding( Key.W );
+				actions.StartCommand.AddDefaultBinding( Key.Escape );
+				actions.Accept.AddDefaultBinding( Key.PadEnter );
+				actions.Accept.AddDefaultBinding( Key.Return );
 			}
 			else if ( playerID == 2 )
 			{
 				actions.Left.AddDefaultBinding( Key.LeftArrow );
 				actions.Right.AddDefaultBinding( Key.RightArrow );
 				actions.Jump.AddDefaultBinding( Key.UpArrow );
+				actions.StartCommand.AddDefaultBinding( Key.Escape );
+				actions.Accept.AddDefaultBinding( Key.PadEnter );
+				actions.Accept.AddDefaultBinding( Key.Return );
 			}
 
 			actions.Left.AddDefaultBinding( InputControlType.LeftStickLeft );
@@ -79,7 +91,8 @@ namespace JWF.ClassicMap
 			actions.Right.AddDefaultBinding( InputControlType.DPadRight );
 			actions.Jump.AddDefaultBinding( InputControlType.DPadUp );
 
-			actions.Start.AddDefaultBinding( InputControlType.Start );
+			actions.StartCommand.AddDefaultBinding( InputControlType.Command );
+			actions.Accept.AddDefaultBinding( InputControlType.Action1 );
 
 			return actions;
 		}

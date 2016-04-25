@@ -7,10 +7,12 @@ namespace JWF.ClassicMap
 		public Vector3 SpawnPosition;
 		private int _LastTouch = 0;
 		private Renderer _Renderer;
+		private ParticleSystem _Trail;
 
 		void Start()
 		{
 			_Renderer = GetComponent<Renderer>();
+			_Trail = GetComponent<ParticleSystem>();
 		}
 
 		public int GetLastTouch()
@@ -28,7 +30,9 @@ namespace JWF.ClassicMap
 			{
 				JWFClassicMapPlayerController controller =  c.gameObject.GetComponent<JWFClassicMapPlayerController>();
 				_LastTouch = controller.PlayerData.ID;
-				_Renderer.material.color = controller.PlayerData.Team == PlayerTeam.Red ? Color.red : Color.blue;
+				Color color = controller.PlayerData.Team == PlayerTeam.Red ? Color.red : Color.blue;
+				_Renderer.material.color = color;
+				_Trail.startColor = color;
 			}
 		}
 

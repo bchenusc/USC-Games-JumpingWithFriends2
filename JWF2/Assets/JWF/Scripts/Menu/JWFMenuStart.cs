@@ -39,6 +39,11 @@ namespace JWF
 
 		public override void AcceptPressed()
 		{
+			if (_State == JWFStartMenuState.Quit)
+			{
+				Application.Quit();
+				return;
+			}
 			_MenuManager.ChangeStateTo( _StartMenuStates[(int) _State] );
 		}
 

@@ -23,6 +23,7 @@ namespace JWF
 			cameraManager = Camera.main.GetComponent<JWFMenuCamera>();
 			ChangeStateTo(gameObject.GetComponent<JWFMenuStart>());
 			JWFPlayerManager.Get.Init();
+			JWFPlayerManager.Get.RemoveAllPlayers();
 		}
 
 		public void ChangeStateTo(JWFMenuBase state)

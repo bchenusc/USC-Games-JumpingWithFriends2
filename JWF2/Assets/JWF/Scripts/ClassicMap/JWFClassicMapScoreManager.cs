@@ -186,7 +186,7 @@ namespace JWF.ClassicMap
 
 		private void ReturnToMenu()
 		{
-			Time.timeScale = 1.0f;
+			ReturnTimeScale();
 			JWFSceneManager.LoadLevel( Scenes.MENU );
 		}
 

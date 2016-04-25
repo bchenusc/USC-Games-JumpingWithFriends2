@@ -32,6 +32,9 @@ namespace JWF.ClassicMap
 		public GameObject WinText = null;
 		public Text WinTextChild = null;
 
+		public GameObject PauseMenuQuit = null;
+		public GameObject PauseMenuResume = null;
+
 		public JWFClassicMapCamera CameraManager;
 		private JWFClassicMapInitSounds _MapInitSounds;
 

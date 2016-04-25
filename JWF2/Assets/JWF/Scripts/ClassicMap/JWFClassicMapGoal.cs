@@ -5,7 +5,7 @@ namespace JWF.ClassicMap
 	public class JWFClassicMapGoal : MonoBehaviour
 	{
 		public AudioClip GoalScoredSound;
-		private float _GoalScoredSoundVolume = 0.2f;
+		private float _GoalScoredSoundVolume = 0.02f;
 		private AudioSource GoalScoredSource;
 
 		public PlayerTeam OwningGoal = PlayerTeam.Blue;
