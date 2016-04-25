@@ -30,6 +30,8 @@ namespace JWF.ClassicMap
 		// Set in Init()
 		private Text _BlueScoreText = null;
 		private Text _RedScoreText = null;
+		private Text _BlueScoreTextLarge = null;
+		private Text _RedScoreTextLarge = null;
 		private GameObject _WinText = null;
 		private GameObject _Ball = null;
 		private JWFClassicMapCamera _CameraManager = null;
@@ -49,13 +51,15 @@ namespace JWF.ClassicMap
 		{
 			_BlueScoreText = initScript.BlueScoreText;
 			_RedScoreText = initScript.RedScoreText;
+			_BlueScoreTextLarge = initScript.BlueScoreTextLarge;
+			_RedScoreTextLarge = initScript.RedScoreTextLarge;
 			_WinText = initScript.WinText;
 			_WinTextChild = initScript.WinTextChild;
 			_Ball = initScript.Ball;
 			_CameraManager = initScript.CameraManager;
 
-			_BlueScore = _MaxScore;
-			_RedScore = _MaxScore;
+			_BlueScore = 0;
+			_RedScore = 0;
 			UpdateScore();
 		}
 
@@ -65,12 +69,12 @@ namespace JWF.ClassicMap
 			{
 				case PlayerTeam.Red:
 				_CameraManager.GoalScoredCameraBM( PlayerTeam.Blue );
-				--_RedScore;
+				++_RedScore;
 				break;
 
 				case PlayerTeam.Blue:
 				_CameraManager.GoalScoredCameraBM( PlayerTeam.Red );
-				--_BlueScore;
+				++_BlueScore;
 				break;
 			}
 
@@ -79,19 +83,19 @@ namespace JWF.ClassicMap
 				switch ( playerId )
 				{
 					case 1:
-					--_P1Score;
+					++_P1Score;
 					break;
 
 					case 2:
-					--_P2Score;
+					++_P2Score;
 					break;
 
 					case 3:
-					--_P3Score;
+					++_P3Score;
 					break;
 
 					case 4:
-					--_P4Score;
+					++_P4Score;
 					break;
 				}
 			}
@@ -152,12 +156,12 @@ namespace JWF.ClassicMap
 
 		private bool CheckIfGameOver()
 		{
-			if ( _BlueScore == 0 )
+			if ( _BlueScore == _MaxScore )
 			{
 				GameOver( PlayerTeam.Blue );
 				return true;
 			}
-			else if ( _RedScore == 0 )
+			else if ( _RedScore == _MaxScore )
 			{
 				GameOver( PlayerTeam.Red );
 				return true;
@@ -173,6 +177,10 @@ namespace JWF.ClassicMap
 			_WinText.transform.GetComponent<Image>().color = teamColor;
 			_WinText.SetActive( true );
 			_Ball.SetActive( false );
+			_BlueScoreTextLarge.transform.parent.gameObject.SetActive( true );
+			_RedScoreTextLarge.transform.parent.gameObject.SetActive( true );
+			_BlueScoreTextLarge.text = _BlueScore.ToString();
+			_RedScoreTextLarge.text = _RedScore.ToString();
 			TimerManager.Get.SetTimer( _ReturnToMenuHandle, ReturnToMenu, _EndOfGameDelayToMenu );
 		}
 

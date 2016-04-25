@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 44ede4987c23932429dca4c4ef960b69
-timeCreated: 1461032280
+guid: 186dc67027e94a24eb4ddfdca37131ea
+timeCreated: 1461579185
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: sm_Player
+    4300000: sm_Player1
   materials:
     importMaterials: 1
     materialName: 0

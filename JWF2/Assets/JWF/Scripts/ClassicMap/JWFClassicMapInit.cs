@@ -24,6 +24,9 @@ namespace JWF.ClassicMap
 
 		public Text BlueScoreText = null;
 		public Text RedScoreText = null;
+		public Text BlueScoreTextLarge = null;
+		public Text RedScoreTextLarge = null;
+
 		public GameObject IntroText = null;
 		public Text IntroTextChild = null;
 		public GameObject WinText = null;
