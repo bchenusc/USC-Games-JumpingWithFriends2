@@ -25,7 +25,7 @@ namespace JWF
 
 		public override Vector3 GetCameraPosition()
 		{
-			return new Vector3( -10, 0.71f, -10.36f );
+			return new Vector3( -10, 1.5f, -10.5f );
 		}
 
 		public override JWFMenuState GetState()

@@ -24,7 +24,10 @@ namespace JWF
 			ChangeStateTo(gameObject.GetComponent<JWFMenuStart>());
 			JWFPlayerManager.Get.Init();
 			JWFPlayerManager.Get.RemoveAllPlayers();
+
+#if !UNITY_EDITOR
 			Cursor.visible = false;
+#endif
 		}
 
 		public void ChangeStateTo(JWFMenuBase state)
