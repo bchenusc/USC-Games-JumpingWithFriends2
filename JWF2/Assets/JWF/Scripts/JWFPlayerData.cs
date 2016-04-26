@@ -16,6 +16,7 @@ namespace JWF
 		private PlayerTeam _Team;
 		private Material _Primary;
 		private Material _Secondary;
+		private int _IsKeyboard = 0; // Keyboard 1 is WASD, Keyboard 2 is Arrowkeys.
 
 		public int ID
 		{
@@ -47,11 +48,17 @@ namespace JWF
 			set { _Secondary = value; }
 		}
 
-		public JWFPlayerData(int id, PlayerActionSet action, PlayerTeam team)
+		public int IsKeyboard
+		{
+			get { return _IsKeyboard; }
+		}
+
+		public JWFPlayerData(int id, PlayerActionSet action, PlayerTeam team, int isKeyboard)
 		{
 			ID = id;
 			Actions = action;
 			Team = team;
+			_IsKeyboard = isKeyboard;
 		}
 
 		public void Reset()

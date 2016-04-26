@@ -18,7 +18,7 @@ namespace JWF.ClassicMap
 		private float _RealignForce = 1200;
 		private float _JumpForce = 600;
 		private float _AirControl = 300;
-		private float _TiltPower = 1800;
+		private float _TiltPower = 1400;
 		private bool _Grounded = false;
 		private bool _ShouldTiltLeft = false;
 		private bool _ShouldTiltRight = false;

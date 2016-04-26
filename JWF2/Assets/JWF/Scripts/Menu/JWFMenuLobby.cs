@@ -78,12 +78,6 @@ namespace JWF
 				CreatePlayer( true, null /*Keyboard player has no inputDevice*/, joiningPlayer );
 			}
 
-			int removingPlayer = RemoveButtonWasPressedOnKeybaord(GetKeyboardListener());
-			if ( removingPlayer != 0 )
-			{
-				RemovePlayer( removingPlayer );
-			}
-
 			if ( BackButtonWasPressed( GetJoystickListener() ) || BackButtonWasPressed( GetKeyboardListener() ) )
 			{
 				RemoveAllPlayers();
@@ -160,14 +154,21 @@ namespace JWF
 		JWFPlayerData CreateJoystickPlayer(InputDevice inputDevice)
 		{
 			JWFPlayerData data = JWFPlayerManager.Get.CreateJoystickPlayer( inputDevice );
-			PlayerStatues[data.ID-1].SetActive( true );
+			if ( data != null )
+			{
+				PlayerStatues[data.ID - 1].SetActive( true );
+			}
 			return data;
 		}
 
-		JWFPlayerData CreateKeyboardPlayer(int playerID)
+		JWFPlayerData CreateKeyboardPlayer(int whichPlayer)
 		{
-			PlayerStatues[playerID - 1].SetActive( true );
-			return JWFPlayerManager.Get.CreateKeyboardPlayer( playerID );
+			JWFPlayerData data = JWFPlayerManager.Get.CreateKeyboardPlayer( whichPlayer );
+			if ( data != null )
+			{
+				PlayerStatues[data.ID - 1].SetActive( true );
+			}
+			return data;
 		}
 
 		void RemovePlayer(int playerId)

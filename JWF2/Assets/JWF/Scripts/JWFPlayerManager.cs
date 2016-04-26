@@ -95,11 +95,11 @@ namespace JWF
 			return null;
 		}
 
-		bool IsPlayerAlreadyRegistered(int playerID)
+		bool IsKeyboardPlayerAlreadyRegistered(int whichPlayer)
 		{
 			foreach ( JWFPlayerData p in _players )
 			{
-				if ( p.ID == playerID )
+				if ( p.IsKeyboard == whichPlayer)
 				{
 					return true;
 				}
@@ -107,19 +107,19 @@ namespace JWF
 			return false;
 		}
 
-		public JWFPlayerData CreateKeyboardPlayer(int playerID)
+		public JWFPlayerData CreateKeyboardPlayer(int whichPlayer)
 		{
-			if ( IsPlayerAlreadyRegistered( playerID ) )
+			if ( IsKeyboardPlayerAlreadyRegistered( whichPlayer ) )
 			{
 				return null;
 			}
-			Debug.Log( "Create Keyboard Player " + playerID );
+			Debug.Log( "Create Keyboard Player " + whichPlayer );
 
-			// Keyboard player for only player 1 and player 2.
 			JWFClassicMapPlayerActions actions;
-			actions = JWFClassicMapPlayerActions.CreateWithKeyboardBindings( playerID );
+			actions = JWFClassicMapPlayerActions.CreateWithKeyboardBindings( whichPlayer );
 
-			var player = new JWFPlayerData(playerID, actions, DetermineTeam(playerID));
+			int playerID = _players.Count + 1;
+			var player = new JWFPlayerData(playerID, actions, DetermineTeam(playerID), whichPlayer /*is keyboard*/ );
 			_players.Add( player );
 			return player;
 		}
@@ -151,7 +151,7 @@ namespace JWF
 					actions.Device = inputDevice;
 				}
 
-				var player = new JWFPlayerData(playerID, actions, DetermineTeam(playerID));
+				var player = new JWFPlayerData(playerID, actions, DetermineTeam(playerID), 0);
 				_players.Add( player );
 				return player;
 			}

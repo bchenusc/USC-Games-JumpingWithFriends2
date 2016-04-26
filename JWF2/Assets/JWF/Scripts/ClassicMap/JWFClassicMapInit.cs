@@ -114,8 +114,8 @@ namespace JWF.ClassicMap
 			else if ( num_players == FOUR_PLAYERS )
 			{
 				SpawnPlayer( JWFPlayerManager.Get.GetPlayerWithID( PLAYER_1 ), _SpawnLocations[0] );
-				SpawnPlayer( JWFPlayerManager.Get.GetPlayerWithID( PLAYER_2 ), _SpawnLocations[1] );
-				SpawnPlayer( JWFPlayerManager.Get.GetPlayerWithID( PLAYER_3 ), _SpawnLocations[2] );
+				SpawnPlayer( JWFPlayerManager.Get.GetPlayerWithID( PLAYER_2 ), _SpawnLocations[2] );
+				SpawnPlayer( JWFPlayerManager.Get.GetPlayerWithID( PLAYER_3 ), _SpawnLocations[1] );
 				SpawnPlayer( JWFPlayerManager.Get.GetPlayerWithID( PLAYER_4 ), _SpawnLocations[3] );
 			}
 		}
