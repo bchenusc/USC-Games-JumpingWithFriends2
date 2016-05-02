@@ -7,6 +7,7 @@ namespace JWF
 	{
 		public static string MENU = "JWFMenu";
 		public static string CLASSIC_MAP = "JWFClassicMap";
+		public static string SMASH_MAP = "JWFSmashMap";
 	}
 
 	public class JWFSceneManager : MonoBehaviour
