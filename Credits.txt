@@ -8,61 +8,73 @@ Art
 Brian Chen
 
 Music
-"Pixelland" Kevin MacLeod (incompetech.com)
-Licensed under Creative Commons: By Attribution 3.0 License
+"Pixelland" Kevin MacLeod 
+incompetech.com
+Creative Commons: By Attribution 3.0 License
 http://creativecommons.org/licenses/by/3.0/
 
-"Vivacity" Kevin MacLeod (incompetech.com)
-Licensed under Creative Commons: By Attribution 3.0 License
+"Vivacity" Kevin MacLeod 
+incompetech.com
+Creative Commons: By Attribution 3.0 License
 http://creativecommons.org/licenses/by/3.0/
 
 SFX
-"Annoying_Air_Siren.flac" qubodup (https://www.freesound.org/people/qubodup/sounds/184937/)
-Licensed under Creative Commons: By Attribution 3.0 Unported
+"Annoying_Air_Siren.flac" qubodup 
+https://www.freesound.org/people/qubodup/sounds/184937/
+Creative Commons: By Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
 Changes: Pitch, Duration, Speed
 
-"camera_snap1.wav" thecheesman (https://www.freesound.org/people/thecheeseman/sounds/51360/)
-Licensed under Creative Commons: By Attribution 3.0 Unported
+"camera_snap1.wav" thecheesman 
+https://www.freesound.org/people/thecheeseman/sounds/51360/
+Creative Commons: By Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
 Changes: Pitch, Duration, Speed
 
-"cheer_01.wav" Corisca_S (https://www.freesound.org/people/Corsica_S/sounds/337000/)
-Licensed under Creative Commons: By Attribution 3.0 Unported
+"cheer_01.wav" Corisca_S 
+https://www.freesound.org/people/Corsica_S/sounds/337000/
+Creative Commons: By Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
 Changes: Pitch, Duration, Speed
 
-"falling_whistle_swish_1.wav" blukotek (https://www.freesound.org/people/blukotek/sounds/268914/)
+"falling_whistle_swish_1.wav" blukotek 
+https://www.freesound.org/people/blukotek/sounds/268914/
 CC0 1.0 Universal License: Public Domain Dedication
 http://creativecommons.org/publicdomain/zero/1.0/
 Changes: Pitch, Duration, Speed
 
-"good_kick_in_the_head_sound.aif" mwl500 (https://www.freesound.org/people/mwl500/sounds/54807/)
-Licensed under Creative Commons: By Attribution 3.0 Unported
+"good_kick_in_the_head_sound.aif" mwl500 
+https://www.freesound.org/people/mwl500/sounds/54807/
+Creative Commons: By Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
 Changes: Pitch, Duration, Speed
 
-"jump-03.wav" littlerobotsoundfactory (https://www.freesound.org/people/LittleRobotSoundFactory/sounds/270323/)
-Licensed under Creative Commons: By Attribution 3.0 Unported
+"jump-03.wav" littlerobotsoundfactory 
+https://www.freesound.org/people/LittleRobotSoundFactory/sounds/270323/
+Creative Commons: By Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
 Changes: Pitch, Duration, Speed
 
-"Jump.wav" n_audioman https://www.freesound.org/people/n_audioman/sounds/273560/
-Licensed under Creative Commons: By Attribution 3.0 Unported
+"Jump.wav" n_audioman 
+https://www.freesound.org/people/n_audioman/sounds/273560/
+Creative Commons: By Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
 Changes: Pitch, Duration, Speed
 
-"Jump16.wav" n_audioman (https://www.freesound.org/people/n_audioman/sounds/273567/)
-Licensed under Creative Commons: By Attribution 3.0 Unported
+"Jump16.wav" n_audioman 
+https://www.freesound.org/people/n_audioman/sounds/273567/
+Creative Commons: By Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
 Changes: Pitch, Duration, Speed
 
-"referee-whistle.wav" Pablo-F (https://www.freesound.org/people/Pablo-F/sounds/90743/)
-Licensed under Creative Commons: By Attribution 3.0 Unported
+"referee-whistle.wav" Pablo-F 
+https://www.freesound.org/people/Pablo-F/sounds/90743/
+Creative Commons: By Attribution 3.0 Unported
 http://creativecommons.org/licenses/by/3.0/
 Changes: Pitch, Duration, Speed
 
-"Sci Fi button beep.wav" peepholecircus (https://www.freesound.org/people/peepholecircus/sounds/196979/)
+"Sci Fi button beep.wav" peepholecircus 
+https://www.freesound.org/people/peepholecircus/sounds/196979/
 CC0 1.0 Universal License: Public Domain Dedication
 http://creativecommons.org/publicdomain/zero/1.0/
 Changes: Pitch, Duration, Speed

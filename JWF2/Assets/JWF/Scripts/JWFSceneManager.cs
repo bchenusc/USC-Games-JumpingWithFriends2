@@ -14,6 +14,7 @@ namespace JWF
 		public static void LoadLevel(string levelName)
 		{
 			SceneManager.LoadScene( levelName );
+			Time.timeScale = 1.0f;
 		}
 	}
 }

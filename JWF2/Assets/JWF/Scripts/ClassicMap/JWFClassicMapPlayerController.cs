@@ -15,8 +15,9 @@ namespace JWF.ClassicMap
 			set { _PlayerData = value; }
 		}
 
-		private float _RealignForce = 1200;
-		private float _JumpForce = 600;
+		private float _RealignForce = 1100;
+		private float _RealignForceDampenerScaler = 0;
+		private float _JumpForce = 700;
 		private float _AirControl = 300;
 		private float _TiltPower = 1400;
 		private bool _Grounded = false;
@@ -102,13 +103,23 @@ namespace JWF.ClassicMap
 
 		void TiltLeft()
 		{
-			_Rigidbody.AddTorque( Vector3.forward * _TiltPower * (Mathf.Abs( Vector3.Dot( transform.up, Vector3.up ) + 0.1f) ) );
+			float realignDampener = 0.5f;
+			if (_Grounded)
+			{
+				realignDampener = ( Mathf.Abs( Vector3.Dot( transform.up, Vector3.up ) + _RealignForceDampenerScaler ) );
+			}
+			_Rigidbody.AddTorque( Vector3.forward * _TiltPower * realignDampener);
 			_Rigidbody.AddForce( Vector3.left * _AirControl );
 		}
 
 		void TiltRight()
 		{
-			_Rigidbody.AddTorque( -Vector3.forward * _TiltPower * (Mathf.Abs( Vector3.Dot( transform.up, Vector3.up ) + 0.1f) ) );
+			float realignDampener = 0.5f;
+			if ( _Grounded )
+			{
+				realignDampener = ( Mathf.Abs( Vector3.Dot( transform.up, Vector3.up ) + _RealignForceDampenerScaler ) );
+			}
+			_Rigidbody.AddTorque( -Vector3.forward * _TiltPower * realignDampener );
 			_Rigidbody.AddForce( Vector3.right * _AirControl );
 		}
 
