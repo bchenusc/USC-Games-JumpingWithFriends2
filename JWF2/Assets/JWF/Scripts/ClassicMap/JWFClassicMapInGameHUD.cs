@@ -87,7 +87,10 @@ namespace JWF.ClassicMap
 				data = JWFPlayerManager.Get.CreateJoystickPlayer( inputDevice );
 
 			// Turn on Player's bottom UI.
-			_Initter.PlayerBottomUI[data.ID - 1].SetActive( true );
+			if ( data != null )
+			{
+				_Initter.PlayerBottomUI[data.ID - 1].SetActive( true );
+			}
 
 			return data;
 		}
