@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace JWF
+namespace JWF.Menu
 {
 	public class JWFMenuBase : MonoBehaviour
 	{

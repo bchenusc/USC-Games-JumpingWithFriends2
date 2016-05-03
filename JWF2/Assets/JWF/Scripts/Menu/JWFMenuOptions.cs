@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace JWF
+namespace JWF.Menu
 {
 	public class JWFMenuOptions : JWFMenuBase
 	{

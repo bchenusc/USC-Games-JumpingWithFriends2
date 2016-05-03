@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace JWF
+namespace JWF.Menu
 {
 	public enum JWFMenuState
 	{
 		MenuStart = 0,
-		MenuLobby = 1,
+		MenuMapSelect = 1,
 		MenuOptions = 2
 	}
 

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-namespace JWF
+namespace JWF.Menu
 {
 	public class JWFMenuStart : JWFMenuBase
 	{
@@ -22,7 +22,7 @@ namespace JWF
 		void Start()
 		{
 			_StartMenuStates.Add( gameObject.GetComponent<JWFMenuOptions>() ); // 0 
-			_StartMenuStates.Add( gameObject.GetComponent<JWFMenuLobby>() ); // 1
+			_StartMenuStates.Add( gameObject.GetComponent<JWFMenuMapSelect>() ); // 1
 			_MenuManager = gameObject.GetComponent<JWFMenuManager>();
 			iTween.ScaleTo( StartMenuButtons[(int) _State], Vector3.one * _ButtonScaleUp, _ButtonScaleTime );
 		}
@@ -39,6 +39,7 @@ namespace JWF
 
 		public override void AcceptPressed()
 		{
+			base.AcceptPressed();
 			if (_State == JWFStartMenuState.Quit)
 			{
 				Application.Quit();
@@ -49,6 +50,7 @@ namespace JWF
 
 		public override void LeftPressed()
 		{
+			base.LeftPressed();
 			// Returns the button the left. If left most, then return itself.
 			if ( _State == 0 ) return;
 			iTween.ScaleTo( StartMenuButtons[(int) _State], Vector3.one * _ButtonScaleDown, _ButtonScaleTime );
@@ -58,6 +60,7 @@ namespace JWF
 
 		public override void RightPressed()
 		{
+			base.RightPressed();
 			if ( (int) _State >= System.Enum.GetNames( typeof( JWFStartMenuState ) ).Length - 1 ) return;
 			iTween.ScaleTo( StartMenuButtons[(int) _State], Vector3.one * _ButtonScaleDown, _ButtonScaleTime );
 			++_State;
