@@ -55,17 +55,18 @@ namespace JWF.ClassicMap
 		private TimerHandle _IntroSeq1Handle = new TimerHandle();
 		private TimerHandle _CountdownHandle = new TimerHandle();
 
-		void OnLevelWasLoaded(int level)
+		void Start()
 		{
-			if ( level == Scenes.CLASSIC_MAP.Second )
-			{
-				_MapInitSounds = gameObject.GetComponent<JWFClassicMapInitSounds>();
-				_Ball = GameObject.FindWithTag( GameStatics.BALL_TAG );
-				JWFClassicMapScoreManager.Get.Init( this );
-				IntroText.SetActive( true );
-				WinText.SetActive( false );
-				TimerManager.Get.SetTimer( _IntroSeq1Handle, IntroSeq1, _IntroSeq1Delay );
-			}
+			_MapInitSounds = gameObject.GetComponent<JWFClassicMapInitSounds>();
+			_Ball = GameObject.FindWithTag( GameStatics.BALL_TAG );
+			IntroText.SetActive( true );
+			WinText.SetActive( false );
+			JWFClassicMapScoreManager.Get.Init( this );
+		}
+
+		public void StartPreGame()
+		{
+			TimerManager.Get.SetTimer( _IntroSeq1Handle, IntroSeq1, _IntroSeq1Delay );
 		}
 
 		// Happens after 1 <See: _IntroSeq1Delay> second.
@@ -98,7 +99,7 @@ namespace JWF.ClassicMap
 			_Ball.GetComponent<Rigidbody>().isKinematic = false;
 		}
 
-		void PlayerSpawner()
+		public void PlayerSpawner()
 		{
 			int num_players = JWFPlayerManager.Get.GetPlayerCount();
 
@@ -119,7 +120,7 @@ namespace JWF.ClassicMap
 			}
 		}
 
-		void SpawnPlayer(JWFPlayerData player, Vector3 position)
+		public void SpawnPlayer(JWFPlayerData player, Vector3 position)
 		{
 			GameObject clone = Instantiate(PlayerPrefab, position, PlayerPrefab.transform.rotation) as GameObject;
 			JWFClassicMapPlayerController controller = clone.GetComponent<JWFClassicMapPlayerController>();

@@ -25,10 +25,13 @@ namespace JWF
 
 		public void ChangeBGMusic(AudioClip clip, float volume)
 		{
-			MusicSource.Stop();
-			MusicSource.clip = clip;
-			MusicSource.volume = volume;
-			MusicSource.Play();
+			if ( MusicSource != null )
+			{
+				MusicSource.Stop();
+				MusicSource.clip = clip;
+				MusicSource.volume = volume;
+				MusicSource.Play();
+			}
 		}
 
 		//Used to play single sound clips.

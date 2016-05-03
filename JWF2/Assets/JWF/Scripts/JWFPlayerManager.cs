@@ -53,6 +53,7 @@ namespace JWF
 
 		public void RemovePlayer(int playerId)
 		{
+			Debug.Log( "Removing Player " + playerId );
 			JWFPlayerData player = null;
 			foreach ( JWFPlayerData p in _players )
 			{

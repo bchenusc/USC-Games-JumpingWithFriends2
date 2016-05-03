@@ -1711,7 +1711,7 @@ MonoBehaviour:
   logDebugInfo: 1
   invertYAxis: 0
   useFixedUpdate: 0
-  dontDestroyOnLoad: 1
+  dontDestroyOnLoad: 0
   enableXInput: 0
   xInputUpdateRate: 0
   xInputBufferSize: 0
