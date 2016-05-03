@@ -30,6 +30,7 @@ namespace JWF
 				MusicSource.Stop();
 				MusicSource.clip = clip;
 				MusicSource.volume = volume;
+				MusicSource.loop = true;
 				MusicSource.Play();
 			}
 		}
