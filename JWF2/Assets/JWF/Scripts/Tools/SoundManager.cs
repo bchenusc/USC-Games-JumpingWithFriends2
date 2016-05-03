@@ -25,14 +25,14 @@ namespace JWF
 
 		public void ChangeBGMusic(AudioClip clip, float volume)
 		{
-			if (MusicSource == null)
+			if ( MusicSource == null )
 			{
 				Init();
 			}
-
 			MusicSource.Stop();
 			MusicSource.clip = clip;
 			MusicSource.volume = volume;
+			MusicSource.loop = true;
 			MusicSource.Play();
 		}
 

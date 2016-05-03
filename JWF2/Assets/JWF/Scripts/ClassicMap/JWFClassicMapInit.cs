@@ -34,6 +34,8 @@ namespace JWF.ClassicMap
 		public GameObject PauseMenuQuit = null;
 		public GameObject PauseMenuResume = null;
 
+		public GameObject[] PlayerBottomUI = null;
+
 		public JWFClassicMapCamera CameraManager;
 		private JWFClassicMapInitSounds _MapInitSounds;
 
@@ -64,6 +66,7 @@ namespace JWF.ClassicMap
 			JWFClassicMapScoreManager.Get.Init( this );
 		}
 
+		// Called from the HUD class once all players have joined.
 		public void StartPreGame()
 		{
 			TimerManager.Get.SetTimer( _IntroSeq1Handle, IntroSeq1, _IntroSeq1Delay );

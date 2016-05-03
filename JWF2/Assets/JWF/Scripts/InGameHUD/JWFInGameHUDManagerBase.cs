@@ -22,6 +22,8 @@ namespace JWF.InGameHUD
 		{
 			JWFPlayerManager.Get.Init();
 			JWFPlayerManager.Get.RemoveAllPlayers();
+			keyboardListener.ClearInputState();
+			joystickListener.ClearInputState();
 
 #if !UNITY_EDITOR
 			Cursor.visible = false;

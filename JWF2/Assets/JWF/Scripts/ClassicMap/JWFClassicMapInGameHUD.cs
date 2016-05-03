@@ -9,109 +9,87 @@ namespace JWF.ClassicMap
 	{
 		private JWFClassicMapInit _Initter;
 
+		public enum HUDState
+		{
+			WaitingForPlayers = 1,
+			Playing = 2,
+			Pause = 3
+		}
+
+		private HUDState _HUDState = HUDState.WaitingForPlayers;
+
 		protected override void Start()
 		{
 			base.Start();
 			_Initter = GameObject.FindGameObjectWithTag( GameStatics.SCENE_INIT_TAG ).GetComponent<JWFClassicMapInit>();
-			GetJoystickListener().ClearInputState();
-			GetKeyboardListener().ClearInputState();
+
+			// Turn off all UI at the bottom of the screen.
+			foreach ( GameObject ui in _Initter.PlayerBottomUI )
+			{
+				ui.SetActive( false );
+			}
 		}
 
 		void Update()
 		{
-			// Joystick controls.
-			if ( JoinButtonWasPressedOnJoystick( GetJoystickListener() ) )
-			{
-				var inputDevice = InputManager.ActiveDevice;
+			// Only works in Waiting for Player state.
+			WaitingForPlayersHUDActions();
+		}
 
-				if ( ThereIsNoPlayerUsingThisJoystick( inputDevice ) )
+		void WaitingForPlayersHUDActions()
+		{
+			if ( _HUDState == HUDState.WaitingForPlayers)
+			{
+				// Joystick controls.
+				if ( JoinButtonWasPressedOnJoystick( joystickListener ) )
 				{
-					CreatePlayer( false, inputDevice, 0 /*Null playerID = joystick*/ );
+					var inputDevice = InputManager.ActiveDevice;
+
+					// If controller isn't already being used.
+					if ( JWFPlayerManager.Get.ThereIsNoPlayerUsingThisJoystick( inputDevice ) )
+					{
+						CreatePlayer( false, inputDevice, 0 /*Null playerID = joystick*/ );
+					}
 				}
-			}
 
-			// Keyboard controls.
-			int joiningPlayer = JoinButtonWasPressedOnKeyboard(GetKeyboardListener());
-			if ( joiningPlayer != 0 )
-			{
-				CreatePlayer( true, null /*Keyboard player has no inputDevice*/, joiningPlayer );
-			}
+				// Keyboard controls.
+				int joiningPlayer = JoinButtonWasPressedOnKeyboard(keyboardListener);
+				if ( joiningPlayer != 0 )
+				{
+					CreatePlayer( true, null /*Keyboard player has no inputDevice*/, joiningPlayer );
+				}
 
-			int removingPlayer = RemoveButtonWasPressedOnKeybaord(GetKeyboardListener());
-			if ( removingPlayer != 0 )
-			{
-				RemovePlayer( removingPlayer );
-			}
-
-			if ( BackButtonWasPressed( GetJoystickListener() ) || BackButtonWasPressed( GetKeyboardListener() ) )
-			{
-				RemoveAllPlayers();
-			}
-
-			// Start pressed - Trying to start the game.
-			if (StartWasPressed(keyboardListener) || StartWasPressed(joystickListener))
-			{
-				StartPressed();
+				// Start pressed - Trying to start the game.
+				if ( StartWasPressed( keyboardListener ) || StartWasPressed( joystickListener ) )
+				{
+					StartPressed();
+				}
 			}
 		}
 
+		// Starts the game.
 		void StartPressed()
 		{
 			int playerCount = JWFPlayerManager.Get.GetPlayerCount();
 			if ( playerCount == 2 || playerCount == 4 )
 			{
+				_HUDState = HUDState.Playing;
 				_Initter.StartPreGame();
 			}
-		}
-
-		bool JoinButtonWasPressedOnJoystick(JWFInGameHUDActions actions)
-		{
-			return actions.Accept.WasPressed ;
 		}
 
 		JWFPlayerData CreatePlayer(bool isKeyboardPlayer, InputDevice inputDevice, int playerID)
 		{
 			JWFPlayerData data;
 			if ( isKeyboardPlayer )
-				data = CreateKeyboardPlayer( playerID );
+				data = JWFPlayerManager.Get.CreateKeyboardPlayer( playerID );
 			else
-				data = CreateJoystickPlayer( inputDevice );
+				data = JWFPlayerManager.Get.CreateJoystickPlayer( inputDevice );
+
+			// Turn on Player's bottom UI.
+			_Initter.PlayerBottomUI[data.ID - 1].SetActive( true );
+
 			return data;
-		}
-
-		JWFPlayerData CreateJoystickPlayer(InputDevice inputDevice)
-		{
-			return JWFPlayerManager.Get.CreateJoystickPlayer( inputDevice );
-		}
-
-		JWFPlayerData CreateKeyboardPlayer(int playerID)
-		{
-			return JWFPlayerManager.Get.CreateKeyboardPlayer( playerID );
-		}
-
-		void RemovePlayer(int playerId)
-		{
-			JWFPlayerManager.Get.RemovePlayer( playerId );
-		}
-
-		void RemoveAllPlayers()
-		{
-			JWFPlayerManager.Get.RemoveAllPlayers();
-		}
-
-		JWFInGameHUDActions GetJoystickListener()
-		{
-			return joystickListener;
-		}
-
-		JWFInGameHUDActions GetKeyboardListener()
-		{
-			return keyboardListener;
-		}
-
-		bool ThereIsNoPlayerUsingThisJoystick(InputDevice inputDevice)
-		{
-			return JWFPlayerManager.Get.ThereIsNoPlayerUsingThisJoystick( inputDevice );
 		}
 
 		int JoinButtonWasPressedOnKeyboard(JWFInGameHUDActions actions)
@@ -126,6 +104,11 @@ namespace JWF.ClassicMap
 			if ( actions.Keyboard1B.WasPressed ) return 1;
 			if ( actions.Keyboard2B.WasPressed ) return 2;
 			return 0;
+		}
+
+		bool JoinButtonWasPressedOnJoystick(JWFInGameHUDActions actions)
+		{
+			return actions.Accept.WasPressed;
 		}
 
 		bool BackButtonWasPressed(JWFInGameHUDActions actions)
