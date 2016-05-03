@@ -22,15 +22,15 @@ namespace JWF.ClassicMap
 
 		void OnCollisionEnter(Collision c)
 		{
-			if ( c.gameObject.CompareTag( GameStatics.KILLZONE_TAG ) )
+			if ( c.gameObject.CompareTag( JWFStatics.KILLZONE_TAG ) )
 			{
 				BallDied();
 			}
-			else if ( c.gameObject.CompareTag( GameStatics.PLAYER_TAG ) )
+			else if ( c.gameObject.CompareTag( JWFStatics.PLAYER_TAG ) )
 			{
-				JWFClassicMapPlayerController controller =  c.gameObject.GetComponent<JWFClassicMapPlayerController>();
-				_LastTouch = controller.PlayerData.ID;
-				Color color = controller.PlayerData.Team == PlayerTeam.Red ? Color.red : Color.blue;
+				JWFClassicMapPlayerController ctl =  c.gameObject.GetComponent<JWFClassicMapPlayerController>();
+				_LastTouch = ctl.PlayerData.ID;
+				Color color = ctl.PlayerData.Team == PlayerTeam.Red ? Color.red : Color.blue;
 				_Renderer.material.color = color;
 				_Trail.startColor = color;
 			}

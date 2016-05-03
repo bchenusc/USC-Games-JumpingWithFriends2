@@ -17,7 +17,7 @@ namespace JWF.ClassicMap
 
 		void OnTriggerEnter(Collider c)
 		{
-			if ( c.gameObject.CompareTag( GameStatics.BALL_TAG ) )
+			if ( c.gameObject.CompareTag( JWFStatics.BALL_TAG ) )
 			{
 				int lastTouch = c.gameObject.GetComponent<JWFClassicMapBall>().GetLastTouch();
 				BallScored( lastTouch );

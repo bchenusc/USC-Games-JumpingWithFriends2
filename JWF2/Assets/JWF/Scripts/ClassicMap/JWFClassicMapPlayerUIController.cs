@@ -24,7 +24,7 @@ namespace JWF.ClassicMap
 		void Start()
 		{
 			_Controller = GetComponent<JWFClassicMapPlayerController>();
-			_SceneInit = GameObject.FindWithTag( GameStatics.SCENE_INIT_TAG ).GetComponent<JWFClassicMapInit>();
+			_SceneInit = GameObject.FindWithTag( JWFStatics.SCENE_INIT_TAG ).GetComponent<JWFClassicMapInit>();
 		}
 
 		void Update()

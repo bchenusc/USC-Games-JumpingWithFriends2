@@ -21,7 +21,8 @@ namespace JWF.ClassicMap
 		protected override void Start()
 		{
 			base.Start();
-			_Initter = GameObject.FindGameObjectWithTag( GameStatics.SCENE_INIT_TAG ).GetComponent<JWFClassicMapInit>();
+
+            _Initter = GameObject.FindWithTag(JWFStatics.SCENE_INIT_TAG).GetComponent<JWFClassicMapInit>();
 
 			// Turn off all UI at the bottom of the screen.
 			foreach ( GameObject ui in _Initter.PlayerBottomUI )

@@ -60,7 +60,7 @@ namespace JWF.ClassicMap
 		void Start()
 		{
 			_MapInitSounds = gameObject.GetComponent<JWFClassicMapInitSounds>();
-			_Ball = GameObject.FindWithTag( GameStatics.BALL_TAG );
+			_Ball = GameObject.FindWithTag( JWFStatics.BALL_TAG );
 			IntroText.SetActive( true );
 			WinText.SetActive( false );
 			JWFClassicMapScoreManager.Get.Init( this );

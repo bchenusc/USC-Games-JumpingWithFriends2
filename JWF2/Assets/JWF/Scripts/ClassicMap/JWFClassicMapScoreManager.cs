@@ -68,12 +68,12 @@ namespace JWF.ClassicMap
 			switch ( team )
 			{
 				case PlayerTeam.Red:
-				_CameraManager.GoalScoredCameraBM( PlayerTeam.Blue );
+				_CameraManager.GoalScoredCameraSwitcher( PlayerTeam.Blue );
 				++_RedScore;
 				break;
 
 				case PlayerTeam.Blue:
-				_CameraManager.GoalScoredCameraBM( PlayerTeam.Red );
+				_CameraManager.GoalScoredCameraSwitcher( PlayerTeam.Red );
 				++_BlueScore;
 				break;
 			}

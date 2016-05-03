@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 namespace JWF.Menu
 {
@@ -20,7 +19,7 @@ namespace JWF.Menu
 
 		void Start()
 		{
-			cameraManager = Camera.main.GetComponent<JWFMenuCamera>();
+			cameraManager = UnityEngine.Camera.main.GetComponent<JWFMenuCamera>();
 			ChangeStateTo(gameObject.GetComponent<JWFMenuStart>());
 			JWFPlayerManager.Get.Init();
 			JWFPlayerManager.Get.RemoveAllPlayers();

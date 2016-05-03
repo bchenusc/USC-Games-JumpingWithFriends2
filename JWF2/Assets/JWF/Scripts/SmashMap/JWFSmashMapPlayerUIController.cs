@@ -24,7 +24,7 @@ namespace JWF.SmashMap
 		void Start()
 		{
 			_Controller = GetComponent<JWFSmashMapPlayerController>();
-			_SceneInit = GameObject.FindWithTag( GameStatics.SCENE_INIT_TAG ).GetComponent<JWFSmashMapInit>();
+			_SceneInit = GameObject.FindWithTag( JWFStatics.SCENE_INIT_TAG ).GetComponent<JWFSmashMapInit>();
 		}
 
 		void Update()

@@ -1,70 +1,39 @@
 ﻿using UnityEngine;
+using JWF.Camera;
 
+/// <summary>
+/// Classic Map camera can switch between multiple cameras on each team.
+/// Team Cameras are cached via Inspector.
+/// </summary>
 namespace JWF.ClassicMap
 {
-	public class JWFClassicMapCamera : MonoBehaviour
-	{
-		public GameObject[] RedGoalCameras;
-		public GameObject[] BlueGoalCameras;
+    [RequireComponent(typeof(JWFCameraSwitcher))]
+    public class JWFClassicMapCamera : MonoBehaviour
+    {
+        // Set in Inspector
+        public GameObject[] RedGoalCameras = null;
+        public GameObject[] BlueGoalCameras = null;
 
-		private float _CameraSwitchRate = 0.4f;
-		private int _CurrentCamera = -1;
-		private GameObject _MainCamera;
-		private TimerHandle _CameraSwitchHandle = new TimerHandle();
+        // Tweakables.
+        private const float _CameraSwitchRate = 0.4f;
 
-		public void Start()
-		{
-			_MainCamera = Camera.main.gameObject;
-		}
+        // Local Cache
+        private JWFCameraSwitcher _SwitcherScript = null;
 
-		public void GoalScoredCameraBM(PlayerTeam team)
-		{
-			switch ( team )
-			{
-				case PlayerTeam.Red:
-				NextCameraRed();
-				TimerManager.Get.SetTimer( _CameraSwitchHandle, NextCameraRed, _CameraSwitchRate, true );
-				break;
+        void Start()
+        {
+            _SwitcherScript = GetComponent<JWFCameraSwitcher>();
+        }
 
-				case PlayerTeam.Blue:
-				NextCameraBlue();
-				TimerManager.Get.SetTimer( _CameraSwitchHandle, NextCameraBlue, _CameraSwitchRate, true );
-				break;
-			}
-		}
-
-		private void NextCameraRed()
-		{
-			++_CurrentCamera;
-			if ( _CurrentCamera >= RedGoalCameras.Length )
-			{
-				ResetBMCameras( PlayerTeam.Red );
-				return;
-			}
-			RedGoalCameras[_CurrentCamera].SetActive( true );
-		}
-
-		private void NextCameraBlue()
-		{
-			++_CurrentCamera;
-			if ( _CurrentCamera >= BlueGoalCameras.Length )
-			{
-				ResetBMCameras( PlayerTeam.Blue );
-				return;
-			}
-			BlueGoalCameras[_CurrentCamera].SetActive( true );
-		}
-
-		private void ResetBMCameras(PlayerTeam team)
-		{
-			GameObject[] cams = team == PlayerTeam.Red ? RedGoalCameras : BlueGoalCameras;
-			_CurrentCamera = -1;
-			TimerManager.Get.ClearTimer( _CameraSwitchHandle );
-			Camera.SetupCurrent(_MainCamera.GetComponent<Camera>());
-			foreach ( GameObject cam in cams )
-			{
-				cam.SetActive( false );
-			}
-		}
-	}
+        /// <summary>
+        /// Switches between the cameras for the specific team. Think "posed snap shots". 
+        /// Delay is given by the Camera Switch Rate.
+        /// </summary>
+        /// <param name="team">Which Team's cameras to switch.</param>
+		public void GoalScoredCameraSwitcher(PlayerTeam team)
+        {
+            GameObject[] camsToSwitch = team == PlayerTeam.Red ? RedGoalCameras : BlueGoalCameras;
+            _SwitcherScript.StartCameraSwitcher(camsToSwitch, _CameraSwitchRate);
+        }
+    }
 }

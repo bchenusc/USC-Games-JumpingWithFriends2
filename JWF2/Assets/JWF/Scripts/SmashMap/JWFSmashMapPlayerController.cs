@@ -125,7 +125,7 @@ namespace JWF.SmashMap
 
 		void OnCollisionStay(Collision c)
 		{
-			if ( !c.gameObject.CompareTag( GameStatics.BALL_TAG ) )
+			if ( !c.gameObject.CompareTag( JWFStatics.BALL_TAG ) )
 			{
 				_Grounded = true;
 			}
@@ -138,7 +138,7 @@ namespace JWF.SmashMap
 
 		void OnCollisionEnter(Collision c)
 		{
-			if ( c.gameObject.CompareTag( GameStatics.KILLZONE_TAG ) )
+			if ( c.gameObject.CompareTag( JWFStatics.KILLZONE_TAG ) )
 			{
 				PlayerDied();
 			}
