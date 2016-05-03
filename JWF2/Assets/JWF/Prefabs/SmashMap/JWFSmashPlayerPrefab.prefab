@@ -12,11 +12,11 @@ GameObject:
   - 23: {fileID: 2387396}
   - 54: {fileID: 5434982}
   - 136: {fileID: 13608808}
-  - 114: {fileID: 11432724}
-  - 114: {fileID: 11430064}
-  - 114: {fileID: 11493474}
+  - 114: {fileID: 11466142}
+  - 114: {fileID: 11495990}
+  - 114: {fileID: 11417474}
   m_Layer: 0
-  m_Name: JWFPlayerPrefab
+  m_Name: JWFSmashPlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +111,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 104
   m_CollisionDetection: 0
---- !u!114 &11430064
+--- !u!114 &11417474
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -119,10 +119,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 140030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14daaae464692854cba815a16cdc2daa, type: 3}
+  m_Script: {fileID: 11500000, guid: eb29366ec4eb11641bab4128c901e377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11432724
+--- !u!114 &11466142
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -130,7 +130,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 140030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a565be94602d41f4f85059273dbf2c6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7036e2c11c9fc844b86d64a40b832d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11495990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3965725f69900ad49951e88216944e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   JumpSounds:
@@ -139,17 +150,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 313e78cb1c5eae64892d693002ac9783, type: 3}
   ThumpSound: {fileID: 8300000, guid: 9eaf59fd50abd6c4da787d20e875ffff, type: 3}
   FallingSound: {fileID: 8300000, guid: 9cd3957ba549772408e47d5dbb665408, type: 3}
---- !u!114 &11493474
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84e06380b112a164d848647592636e15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &13608808
 CapsuleCollider:
   m_ObjectHideFlags: 1
