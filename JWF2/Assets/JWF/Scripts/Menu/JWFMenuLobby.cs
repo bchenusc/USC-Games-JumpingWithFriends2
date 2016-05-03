@@ -54,7 +54,7 @@ namespace JWF
 		{
 			if ( _ReadyToTransitionToGame )
 			{
-				JWFSceneManager.LoadLevel( Scenes.CLASSIC_MAP );
+				JWFSceneManager.LoadLevel( Scenes.SMASH_MAP.First );
 			}
 		}
 

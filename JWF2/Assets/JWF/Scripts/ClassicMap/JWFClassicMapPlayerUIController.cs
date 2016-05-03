@@ -50,7 +50,7 @@ namespace JWF.ClassicMap
 				{
 					if ( _UIState == UIState.Quit )
 					{
-						JWFSceneManager.LoadLevel( Scenes.MENU );
+						JWFSceneManager.LoadLevel( Scenes.MENU.First );
 					}
 					else if ( _UIState == UIState.Resume )
 					{

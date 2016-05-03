@@ -6,7 +6,6 @@ namespace JWF.ClassicMap
 {
 	public class JWFClassicMapInit : MonoBehaviour
 	{
-		private static int CLASSIC_MAP = 1;
 		private static int TWO_PLAYERS = 2;
 		private static int FOUR_PLAYERS = 4;
 
@@ -58,7 +57,7 @@ namespace JWF.ClassicMap
 
 		void OnLevelWasLoaded(int level)
 		{
-			if ( level == CLASSIC_MAP )
+			if ( level == Scenes.CLASSIC_MAP.Second )
 			{
 				_MapInitSounds = gameObject.GetComponent<JWFClassicMapInitSounds>();
 				_Ball = GameObject.FindWithTag( GameStatics.BALL_TAG );

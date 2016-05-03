@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/JWF/Scenes/JWFMenu.unity
   - enabled: 1
     path: Assets/JWF/Scenes/JWFClassicMap.unity
+  - enabled: 1
+    path: Assets/JWF/Scenes/JWFSmashMap.unity

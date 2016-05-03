@@ -187,7 +187,7 @@ namespace JWF.ClassicMap
 		private void ReturnToMenu()
 		{
 			ReturnTimeScale();
-			JWFSceneManager.LoadLevel( Scenes.MENU );
+			JWFSceneManager.LoadLevel( Scenes.MENU.First );
 		}
 
 		protected override bool ShouldDestroyOnLoad()
